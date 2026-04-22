@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI Agent Interview Quiz</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f0f0f;color:#f0f0f0;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:2rem 1rem}
+h1{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;letter-spacing:-1px;margin-bottom:.4rem;text-align:center}
+.subtitle{color:#888;margin-bottom:2.5rem;text-align:center;font-size:.95rem}
+.progress-bar{width:100%;max-width:680px;height:4px;background:rgba(255,255,255,.08);border-radius:4px;margin-bottom:2rem}
+.progress-fill{height:100%;background:#6c63ff;border-radius:4px;transition:width .4s ease}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:2rem 2.5rem;max-width:680px;width:100%}
+.question-num{font-size:.75rem;color:#6c63ff;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:.8rem}
+.question{font-size:1.1rem;font-weight:600;line-height:1.5;margin-bottom:1.6rem}
+.options{display:flex;flex-direction:column;gap:.7rem}
+.option{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.9rem 1.2rem;cursor:pointer;transition:all .2s;font-size:.95rem;text-align:left}
+.option:hover:not(.disabled){background:rgba(108,99,255,.15);border-color:#6c63ff}
+.option.correct{background:rgba(52,199,89,.15);border-color:#34c759;color:#34c759}
+.option.wrong{background:rgba(255,59,48,.12);border-color:#ff3b30;color:#ff3b30}
+.option.disabled{cursor:default}
+.feedback{margin-top:1.2rem;padding:1rem 1.2rem;border-radius:10px;font-size:.9rem;line-height:1.6;display:none}
+.feedback.show{display:block}
+.feedback.correct-fb{background:rgba(52,199,89,.1);border:1px solid rgba(52,199,89,.3);color:#5de87a}
+.feedback.wrong-fb{background:rgba(255,59,48,.08);border:1px solid rgba(255,59,48,.25);color:#ff6b61}
+.btn{margin-top:1.5rem;background:#6c63ff;color:#fff;border:none;padding:.8rem 2rem;border-radius:10px;font-size:.95rem;cursor:pointer;transition:background .2s,transform .1s;display:none}
+.btn:hover{background:#5a52e0;transform:translateY(-1px)}
+.btn.show{display:inline-block}
+.result-card{display:none;text-align:center;max-width:680px;width:100%}
+.result-card.show{display:block}
+.score-circle{width:130px;height:130px;border-radius:50%;border:4px solid #6c63ff;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1.5rem;background:rgba(108,99,255,.1)}
+.score-num{font-size:2.4rem;font-weight:800;color:#6c63ff}
+.score-label{font-size:.75rem;color:#888}
+.result-title{font-size:1.5rem;font-weight:700;margin-bottom:.5rem}
+.result-sub{color:#888;margin-bottom:2rem;font-size:.95rem}
+.tip-box{background:rgba(108,99,255,.08);border:1px solid rgba(108,99,255,.25);border-radius:14px;padding:1.2rem 1.5rem;text-align:left;margin-bottom:1.5rem}
+.tip-box h3{color:#9d97ff;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:.6rem}
+.tip-box p{font-size:.9rem;color:#ccc;line-height:1.6}
+.restart-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#fff;padding:.8rem 2rem;border-radius:10px;font-size:.95rem;cursor:pointer;transition:all .2s}
+.restart-btn:hover{background:rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+
+<h1>AI Agent Interview Quiz</h1>
+<p class="subtitle">Test your prep — 8 questions, instant feedback</p>
+
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<div class="card" id="quiz-card">
+  <div class="question-num" id="q-num"></div>
+  <div class="question" id="q-text"></div>
+  <div class="options" id="q-options"></div>
+  <div class="feedback" id="feedback"></div>
+  <button class="btn" id="next-btn" onclick="nextQuestion()">Next question &rarr;</button>
+</div>
+
+<div class="result-card" id="result-card"></div>
+
+<script>
+const questions=[
+  {
+    q:"What does the guide say is the MAIN reason candidates fail AI agent interviews?",
+    options:["They lack technical knowledge","They can't demonstrate applied thinking under pressure","They don't know enough buzzwords","They haven't built enough projects"],
+    correct:1,
+    feedback:"Applied thinking under pressure is the key differentiator — not raw knowledge."
+  },
+  {
+    q:"Which sentence signals 'senior-level thinking' according to the guide?",
+    options:["I used LangChain and GPT-4","I focused heavily on state management, error handling, and making the system deterministic despite non-deterministic model outputs","I built a RAG pipeline with vector embeddings","I optimised token usage and reduced costs by 40%"],
+    correct:1,
+    feedback:"This sentence shows you understand the real production challenges, not just the happy path."
+  },
+  {
+    q:"What is a BAD answer to 'How do you prevent hallucinations?'",
+    options:["Use RAG to inject verified data","Use better prompts","Constrain outputs with JSON schema","Use tools instead of free-text reasoning"],
+    correct:1,
+    feedback:"'Use better prompts' is vague and shows surface-level thinking. Ground the model with data and constraints."
+  },
+  {
+    q:"When designing an AI agent, which component is responsible for decomposing tasks into steps?",
+    options:["Input handler","Planning layer (LLM)","Tool execution layer","Output validator"],
+    correct:1,
+    feedback:"The planning layer uses the LLM to identify required tools, order of execution, and dependencies."
+  },
+  {
+    q:"What is 'idempotency handling' in the context of an AI agent?",
+    options:["Caching LLM responses to reduce cost","Preventing duplicate actions from executing","Validating JSON outputs against a schema","Storing embeddings in a vector database"],
+    correct:1,
+    feedback:"Idempotency ensures that even if an action is triggered multiple times, it only executes once — critical for reliability."
+  },
+  {
+    q:"How should you evaluate an AI agent in production?",
+    options:["Only measure response quality using human feedback","Track task success rate, tool execution accuracy, latency, cost, and failure modes","Run it against standard NLP benchmarks","Count the number of API calls made"],
+    correct:1,
+    feedback:"Multi-dimensional evaluation shows you think like an engineer building production systems, not just a demo."
+  },
+  {
+    q:"What three phrases should you use in interview answers to signal real-world experience?",
+    options:["'I used', 'I built', 'I deployed'","'The main challenge is…', 'The tradeoff here is…', 'In production, I would…'","'According to the docs', 'Best practice is', 'The framework handles'","'You can', 'It's possible to', 'One option is'"],
+    correct:1,
+    feedback:"These phrases frame your thinking around real constraints — exactly what senior interviewers look for."
+  },
+  {
+    q:"When scaling an AI agent system, which approach is correct?",
+    options:["Use one large synchronous worker to handle all tasks","Separate concerns: stateless workers, queue-based distribution, async execution","Scale vertically by using a bigger server","Increase LLM context window to handle more data"],
+    correct:1,
+    feedback:"Stateless workers + queues enable horizontal scaling. Async execution prevents blocking. These are production-grade patterns."
+  }
+];
+
+let current=0,score=0;
+
+function renderQuestion(){
+  const q=questions[current];
+  document.getElementById('progress').style.width=((current/questions.length)*100)+'%';
+  document.getElementById('q-num').textContent='Question '+(current+1)+' of '+questions.length;
+  document.getElementById('q-text').textContent=q.q;
+  const opts=document.getElementById('q-options');
+  opts.innerHTML='';
+  q.options.forEach((o,i)=>{
+    const btn=document.createElement('button');
+    btn.className='option';
+    btn.textContent=o;
+    btn.onclick=()=>selectAnswer(i);
+    opts.appendChild(btn);
+  });
+  document.getElementById('feedback').className='feedback';
+  document.getElementById('feedback').textContent='';
+  document.getElementById('next-btn').className='btn';
+}
+
+function selectAnswer(idx){
+  const q=questions[current];
+  const opts=document.querySelectorAll('.option');
+  opts.forEach(o=>o.classList.add('disabled'));
+  const fb=document.getElementById('feedback');
+  if(idx===q.correct){
+    opts[idx].classList.add('correct');
+    fb.className='feedback correct-fb show';
+    fb.textContent='Correct! '+q.feedback;
+    score++;
+  } else {
+    opts[idx].classList.add('wrong');
+    opts[q.correct].classList.add('correct');
+    fb.className='feedback wrong-fb show';
+    fb.textContent='Not quite. '+q.feedback;
+  }
+  document.getElementById('next-btn').className='btn show';
+}
+
+function nextQuestion(){
+  current++;
+  if(current<questions.length){renderQuestion();}
+  else{showResult();}
+}
+
+function showResult(){
+  document.getElementById('progress').style.width='100%';
+  document.getElementById('quiz-card').style.display='none';
+  const pct=Math.round((score/questions.length)*100);
+  let title,sub,tip;
+  if(pct>=87){title='Interview Ready';sub='You clearly understand how to think about AI agents in production.';tip='Focus on rehearsing your answers out loud. Fluency matters as much as content.';}
+  else if(pct>=62){title='Almost There';sub='Good foundation — a few gaps to tighten up before the interview.';tip='Re-read the sections on evaluation and scaling. These trip up most candidates.';}
+  else{title='More Prep Needed';sub='Go through the guide again and focus on the "why" behind each answer.';tip='The key insight: interviewers test system thinking and failure modes, not definitions.';}
+  const rc=document.getElementById('result-card');
+  rc.innerHTML=`
+    <div class="score-circle"><span class="score-num">${score}/${questions.length}</span><span class="score-label">${pct}%</span></div>
+    <h2 class="result-title">${title}</h2>
+    <p class="result-sub">${sub}</p>
+    <div class="tip-box"><h3>Your next step</h3><p>${tip}</p></div>
+    <button class="restart-btn" onclick="restartQuiz()">Retake quiz</button>
+  `;
+  rc.className='result-card show';
+}
+
+function restartQuiz(){
+  current=0;score=0;
+  document.getElementById('quiz-card').style.display='';
+  document.getElementById('result-card').className='result-card';
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>

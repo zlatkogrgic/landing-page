@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belugo ‚Äî Premium Pet Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700;9..144,900&family=Albert+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* =============================================
+     CSS VARIABLES & RESET
+  ============================================= */
+  :root {
+    --pink: #FFC2CC;
+    --blue: #D7ECFF;
+    --bg: #FFFCF6;
+    --indigo: #2B2763;
+    --cream: #FEF9EB;
+    --indigo-dark: #1e1b47;
+    --indigo-mid: #3d3882;
+    --text-muted: #7b7899;
+    --radius-sm: 10px;
+    --radius-md: 18px;
+    --radius-lg: 28px;
+    --radius-xl: 40px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Albert Sans', sans-serif;
+    background-color: var(--bg);
+    color: var(--indigo);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', serif;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  a { text-decoration: none; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  /* =============================================
+     MARQUEE BANNER (TOP)
+  ============================================= */
+  .marquee-bar {
+    background: var(--indigo);
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    padding: 9px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-flex;
+    animation: marquee 22s linear infinite;
+    gap: 0;
+  }
+  .marquee-track span {
+    padding: 0 32px;
+    opacity: 0.9;
+  }
+  .marquee-track .dot {
+    color: var(--pink);
+    padding: 0 4px;
+    opacity: 1;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* =============================================
+     HEADER / NAV
+  ============================================= */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1.5px solid rgba(43,39,99,0.08);
+    padding: 0 48px;
+  }
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 72px;
+  }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--indigo);
+    flex-shrink: 0;
+  }
+  .logo span { color: var(--pink); }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    list-style: none;
+    flex: 1;
+  }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--indigo);
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: background 0.18s;
+  }
+  .nav-links a:hover { background: var(--cream); }
+  .nav-links .active-cat { color: var(--pink); }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+  }
+  .nav-icon-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(43,39,99,0.15);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    background: transparent;
+    color: var(--indigo);
+    transition: background 0.18s, border-color 0.18s;
+    font-size: 15px;
+  }
+  .nav-icon-btn:hover { background: var(--cream); border-color: var(--indigo); }
+  .cart-btn {
+    background: var(--indigo);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-family: 'Albert Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 8px;
+    transition: background 0.18s;
+  }
+  .cart-btn:hover { background: var(--indigo-mid); }
+  .cart-badge {
+    background: var(--pink);
+    color: var(--indigo);
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* =============================================
+     HERO SECTION
+  ============================================= */
+  .hero {
+    background: var(--pink);
+    min-height: 540px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    padding: 64px 0 64px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 580px;
+    z-index: 2;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    color: var(--indigo);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    width: fit-content;
+    margin-bottom: 24px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .hero-tag::before { content: "üêæ"; font-size: 13px; }
+  .hero h1 {
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 900;
+    color: var(--indigo);
+    margin-bottom: 20px;
+    line-height: 1.0;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: white;
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--indigo);
+    opacity: 0.75;
+    line-height: 1.6;
+    margin-bottom: 36px;
+    max-width: 360px;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--indigo);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 28px;
+    font-family: 'Albert Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s, transform 0.14s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--indigo-mid); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--indigo);
+    border: 2px solid var(--indigo);
+    padding: 13px 28px;
+    border-radius: 28px;
+    font-family: 'Albert Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.18s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-ghost:hover { background: rgba(43,39,99,0.07); }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-right-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #FFC2CC 0%, #FFD6DE 100%);
+  }
+  .hero-illustration {
+    position: relative; z-index: 1;
+    width: 90%;
+    max-width: 500px;
+    background: rgba(255,255,255,0.18);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    height: 420px;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 80px;
+  }
+  .hero-illustration .hero-emoji { font-size: 100px; animation: float 3s ease-in-out infinite; }
+  .hero-illustration .hero-emoji-small { font-size: 48px; opacity: 0.7; animation: float 3s ease-in-out infinite 0.5s; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .hero-badge {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background: var(--indigo);
+    color: white;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.3;
+    z-index: 3;
+    animation: spin-slow 12s linear infinite;
+  }
+  .hero-badge strong { font-family: 'Fraunces', serif; font-size: 18px; display: block; }
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* =============================================
+     TRUST STRIP
+  ============================================= */
+  .trust-strip {
+    background: var(--indigo);
+    color: white;
+    padding: 16px 48px;
+    overflow: hidden;
+  }
+  .trust-strip-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13.5px;
+    font-weight: 500;
+    opacity: 0.9;
+    padding: 6px 16px;
+  }
+  .trust-icon {
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* =============================================
+     CATEGORY SECTION
+  ============================================= */
+  .section {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 72px 48px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 40px;
+  }
+  .section-title {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--indigo);
+  }
+  .section-title span { color: var(--pink); font-style: italic; }
+  .section-tag {
+    background: var(--cream);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  .see-all {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--indigo);
+    display: flex; align-items: center; gap: 6px;
+    opacity: 0.7;
+    transition: opacity 0.18s;
+    flex-shrink: 0;
+  }
+  .see-all:hover { opacity: 1; }
+
+  /* Pet tabs */
+  .pet-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .pet-tab {
+    padding: 9px 20px;
+    border-radius: 20px;
+    border: 1.5px solid rgba(43,39,99,0.15);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    color: var(--indigo);
+    font-family: 'Albert Sans', sans-serif;
+    transition: all 0.18s;
+  }
+  .pet-tab.active {
+    background: var(--indigo);
+    color: white;
+    border-color: var(--indigo);
+  }
+  .pet-tab:hover:not(.active) { background: var(--cream); }
+
+  /* Category grid */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .cat-card {
+    background: var(--cream);
+    border-radius: var(--radius-lg);
+    padding: 28px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+    border: 1.5px solid transparent;
+  }
+  .cat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(43,39,99,0.1);
+    border-color: rgba(43,39,99,0.08);
+  }
+  .cat-card.dog-card { background: #FFF0F2; }
+  .cat-card.cat-card-c { background: #EBF5FF; }
+  .cat-card.more-card { background: var(--cream); }
+  .cat-emoji { font-size: 40px; }
+  .cat-name {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--indigo);
+  }
+  .cat-count {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* =============================================
+     PROMO BANNER GRID
+  ============================================= */
+  .promo-bg {
+    background: var(--cream);
+    padding: 8px 0 72px;
+  }
+  .promo-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-rows: 220px 220px;
+    gap: 16px;
+  }
+  .promo-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    padding: 28px;
+    transition: transform 0.2s;
+  }
+  .promo-card:hover { transform: scale(1.01); }
+  .promo-card-1 {
+    grid-row: 1 / 3;
+    background: linear-gradient(160deg, var(--pink) 0%, #ffb3c0 100%);
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 12px;
+  }
+  .promo-card-2 { background: var(--indigo); }
+  .promo-card-3 { background: var(--blue); }
+  .promo-card-4 { background: #E8F8F0; }
+  .promo-card-5 { background: linear-gradient(135deg, #FFF0F2 0%, #FFE0E6 100%); }
+
+  .promo-big-emoji { font-size: 80px; }
+  .promo-content { position: relative; z-index: 1; }
+  .promo-content h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .promo-card-1 .promo-content h3 { font-size: 28px; color: var(--indigo); }
+  .promo-card-2 .promo-content h3 { color: white; }
+  .promo-card-3 .promo-content h3 { color: var(--indigo); }
+  .promo-card-4 .promo-content h3 { color: var(--indigo); }
+  .promo-card-5 .promo-content h3 { color: var(--indigo); }
+  .promo-content p { font-size: 13px; opacity: 0.75; margin-bottom: 14px; }
+  .promo-card-2 .promo-content p { color: white; }
+  .promo-link {
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-flex; align-items: center; gap: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--indigo);
+  }
+  .promo-card-2 .promo-link { color: var(--pink); }
+  .promo-link::after { content: "‚Üí"; font-size: 14px; }
+  .promo-discount {
+    position: absolute; top: 20px; right: 20px;
+    background: var(--indigo);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* =============================================
+     PRODUCTS SECTION
+  ============================================= */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .product-card {
+    background: white;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1.5px solid rgba(43,39,99,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(43,39,99,0.1);
+  }
+  .product-img {
+    background: var(--cream);
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    position: relative;
+  }
+  .product-img.dog-bg { background: #FFF0F2; }
+  .product-img.cat-bg { background: #EBF5FF; }
+  .product-badge {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--indigo);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .product-badge.sale { background: #FF6B8A; }
+  .product-body { padding: 18px; }
+  .product-cat {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .product-name {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--indigo);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .product-price {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--indigo);
+  }
+  .product-old-price {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: line-through;
+    font-weight: 400;
+    font-family: 'Albert Sans', sans-serif;
+  }
+  .add-btn {
+    width: 36px; height: 36px;
+    background: var(--indigo);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.18s, transform 0.14s;
+    font-family: 'Albert Sans', sans-serif;
+  }
+  .add-btn:hover { background: var(--indigo-mid); transform: scale(1.08); }
+
+  /* =============================================
+     FRESH FOOD BANNER
+  ============================================= */
+  .fresh-banner {
+    background: var(--indigo);
+    border-radius: var(--radius-xl);
+    padding: 56px 64px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .fresh-banner::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 50%, rgba(255,194,204,0.12) 0%, transparent 60%);
+  }
+  .fresh-content { position: relative; z-index: 1; }
+  .fresh-content .section-tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+  .fresh-content h2 {
+    font-size: clamp(28px, 3.5vw, 44px);
+    color: white;
+    margin: 12px 0 16px;
+  }
+  .fresh-content p { color: rgba(255,255,255,0.7); font-size: 16px; line-height: 1.6; max-width: 480px; margin-bottom: 32px; }
+  .fresh-btns { display: flex; gap: 14px; }
+  .btn-white {
+    background: white;
+    color: var(--indigo);
+    padding: 13px 28px;
+    border-radius: 28px;
+    font-family: 'Albert Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.18s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-white:hover { opacity: 0.9; }
+  .btn-white-ghost {
+    background: transparent;
+    color: white;
+    padding: 13px 28px;
+    border-radius: 28px;
+    font-family: 'Albert Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid rgba(255,255,255,0.4);
+    transition: border-color 0.18s;
+  }
+  .btn-white-ghost:hover { border-color: white; }
+  .fresh-visual {
+    font-size: 100px;
+    position: relative; z-index: 1;
+    text-align: center;
+    animation: float 3s ease-in-out infinite;
+  }
+  .fresh-chips {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .fresh-chip {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.85);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  /* =============================================
+     BRANDS
+  ============================================= */
+  .brands-section { background: var(--cream); padding: 60px 0; }
+  .brands-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+  .brands-title {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .brands-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .brand-pill {
+    background: white;
+    color: var(--indigo);
+    padding: 10px 22px;
+    border-radius: 20px;
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.18s, box-shadow 0.18s;
+    opacity: 0.7;
+  }
+  .brand-pill:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(43,39,99,0.1); opacity: 1; }
+
+  /* =============================================
+     BLOG
+  ============================================= */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .blog-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: white;
+    border: 1.5px solid rgba(43,39,99,0.06);
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+  .blog-card:hover { transform: translateY(-4px); }
+  .blog-img {
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 60px;
+  }
+  .blog-img.b1 { background: var(--pink); }
+  .blog-img.b2 { background: var(--blue); }
+  .blog-img.b3 { background: var(--cream); }
+  .blog-body { padding: 22px; }
+  .blog-meta {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .blog-meta .cat-tag {
+    background: var(--cream);
+    padding: 3px 10px;
+    border-radius: 10px;
+    color: var(--indigo);
+    font-weight: 600;
+  }
+  .blog-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--indigo);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .blog-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+  .blog-read {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--indigo);
+    margin-top: 14px;
+  }
+  .blog-read::after { content: "‚Üí"; }
+
+  /* =============================================
+     FOOTER
+  ============================================= */
+  footer {
+    background: var(--indigo);
+    color: white;
+    padding: 64px 48px 32px;
+  }
+  .footer-inner { max-width: 1280px; margin: 0 auto; }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 32px;
+  }
+  .footer-brand .logo { font-size: 28px; color: white; margin-bottom: 14px; }
+  .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 20px; }
+  .footer-socials { display: flex; gap: 10px; }
+  .social-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.18s;
+  }
+  .social-btn:hover { background: rgba(255,255,255,0.2); }
+  .footer-col h4 {
+    font-family: 'Albert Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 18px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    transition: color 0.18s;
+  }
+  .footer-col ul li a:hover { color: white; }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+  }
+  .newsletter-input-row { display: flex; gap: 8px; }
+  .newsletter-input {
+    flex: 1;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 10px 16px;
+    border-radius: 20px;
+    color: white;
+    font-family: 'Albert Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+  }
+  .newsletter-input::placeholder { color: rgba(255,255,255,0.4); }
+  .newsletter-input:focus { border-color: var(--pink); }
+  .newsletter-btn {
+    background: var(--pink);
+    color: var(--indigo);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-family: 'Albert Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.18s;
+  }
+  .newsletter-btn:hover { opacity: 0.9; }
+
+  /* =============================================
+     SCROLLING MARQUEE PROMO (between sections)
+  ============================================= */
+  .promo-scroll {
+    background: var(--pink);
+    overflow: hidden;
+    padding: 14px 0;
+  }
+  .promo-scroll-track {
+    display: inline-flex;
+    animation: marquee 18s linear infinite;
+    white-space: nowrap;
+  }
+  .promo-scroll-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 32px;
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--indigo);
+  }
+  .promo-scroll-item .bullet { color: white; font-size: 12px; }
+
+  /* =============================================
+     UTILITY
+  ============================================= */
+  .mt-4 { margin-top: 16px; }
+  .mt-8 { margin-top: 32px; }
+  .mb-4 { margin-bottom: 16px; }
+
+  /* =============================================
+     HOVER STATES / ANIMATIONS
+  ============================================= */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<!-- TOP MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <span>üêæ Free delivery on orders over $59.99</span><span class="dot">‚ú¶</span>
+    <span>Get 15% off your first purchase</span><span class="dot">‚ú¶</span>
+    <span>ü¶¥ Vet-approved nutrition for every pet</span><span class="dot">‚ú¶</span>
+    <span>New arrivals in dog treats & toys</span><span class="dot">‚ú¶</span>
+    <span>üêæ Free delivery on orders over $59.99</span><span class="dot">‚ú¶</span>
+    <span>Get 15% off your first purchase</span><span class="dot">‚ú¶</span>
+    <span>ü¶¥ Vet-approved nutrition for every pet</span><span class="dot">‚ú¶</span>
+    <span>New arrivals in dog treats & toys</span><span class="dot">‚ú¶</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="nav-inner">
+    <div class="logo">belu<span>go</span></div>
+    <ul class="nav-links">
+      <li><a href="#" class="active-cat">üêï Dogs</a></li>
+      <li><a href="#">üêà Cats</a></li>
+      <li><a href="#">ü¶ú More Pets</a></li>
+      <li><a href="#">üî• Best Deals</a></li>
+      <li><a href="#">üè∑Ô∏è Brands</a></li>
+      <li><a href="#">About Us</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-icon-btn" title="Search">üîç</button>
+      <button class="nav-icon-btn" title="Wishlist">‚ô°</button>
+      <button class="cart-btn">
+        üõí Cart
+        <span class="cart-badge">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left fade-in">
+    <div class="hero-tag">Premium Pet Shop</div>
+    <h1>Food for <em>Large</em> Breed Dogs</h1>
+    <p class="hero-sub">Complete, balanced nutrition developed by veterinarians ‚Äî crafted with love for every member of your family.</p>
+    <div class="hero-btns">
+      <button class="btn-primary">Shop Now ‚Üí</button>
+      <button class="btn-ghost">Learn More</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-bg"></div>
+    <div class="hero-illustration">
+      <div class="hero-emoji">üêï</div>
+      <div class="hero-emoji-small">ü¶¥ üêæ</div>
+    </div>
+    <div class="hero-badge">
+      <strong>15%</strong>
+      First<br>Order
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-strip-inner">
+    <div class="trust-item">
+      <div class="trust-icon">üöö</div>
+      Free delivery over $59.99
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">ü©∫</div>
+      Vet-approved products
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">üîÑ</div>
+      Easy 30-day returns
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">üîí</div>
+      Secure checkout
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">‚≠ê</div>
+      50,000+ happy pets
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Browse by pet</div>
+      <h2 class="section-title">What is <span>Popular</span> Now</h2>
+    </div>
+    <a href="#" class="see-all">See all categories ‚Üí</a>
+  </div>
+
+  <div class="pet-tabs">
+    <button class="pet-tab active" onclick="setTab(this)">üêï For Dogs</button>
+    <button class="pet-tab" onclick="setTab(this)">üêà For Cats</button>
+    <button class="pet-tab" onclick="setTab(this)">ü¶ú More Pets</button>
+  </div>
+
+  <div class="cat-grid" id="cat-grid">
+    <div class="cat-card dog-card">
+      <div class="cat-emoji">ü¶¥</div>
+      <div class="cat-name">Treats</div>
+      <div class="cat-count">4 products</div>
+    </div>
+    <div class="cat-card dog-card">
+      <div class="cat-emoji">üéæ</div>
+      <div class="cat-name">Toys</div>
+      <div class="cat-count">4 products</div>
+    </div>
+    <div class="cat-card dog-card">
+      <div class="cat-emoji">üõÅ</div>
+      <div class="cat-name">Supplies</div>
+      <div class="cat-count">4 products</div>
+    </div>
+    <div class="cat-card dog-card">
+      <div class="cat-emoji">üêæ</div>
+      <div class="cat-name">Leashes</div>
+      <div class="cat-count">4 products</div>
+    </div>
+    <div class="cat-card dog-card">
+      <div class="cat-emoji">ü•£</div>
+      <div class="cat-name">Food</div>
+      <div class="cat-count">4 products</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROMO GRID -->
+<div class="promo-bg">
+  <div class="section" style="padding-top: 8px;">
+    <div class="promo-grid">
+      <!-- Big left card -->
+      <div class="promo-card promo-card-1">
+        <div class="promo-big-emoji">üêï‚Äçü¶∫</div>
+        <div class="promo-content">
+          <h3>Unique Recipe Based On Natural Ingredients</h3>
+          <p>Premium kibble with real meat, fresh vegetables & superfoods.</p>
+          <a href="#" class="promo-link">Shop Now</a>
+        </div>
+      </div>
+      <!-- Top right 1 -->
+      <div class="promo-card promo-card-2">
+        <div class="promo-content">
+          <h3>Your Pet Is In Reliable Hands!</h3>
+          <p>Trusted by 50,000+ pet owners worldwide.</p>
+          <a href="#" class="promo-link">Discover</a>
+        </div>
+      </div>
+      <!-- Top right 2 -->
+      <div class="promo-card promo-card-3">
+        <div class="promo-content">
+          <h3>Healthy Teeth With an Oral Care Kit</h3>
+          <p>Vet-formulated dental care.</p>
+          <a href="#" class="promo-link">Shop Now</a>
+        </div>
+        <span class="promo-discount">New</span>
+      </div>
+      <!-- Bottom right 1 -->
+      <div class="promo-card promo-card-4">
+        <div class="promo-content">
+          <h3>Comfortable Beds For Your Dog</h3>
+          <p>Orthopedic support for all sizes.</p>
+          <a href="#" class="promo-link">Shop Now</a>
+        </div>
+      </div>
+      <!-- Bottom right 2 -->
+      <div class="promo-card promo-card-5">
+        <div class="promo-content">
+          <h3>Get 30% Off When You Buy 10kg+</h3>
+          <p>Stock up & save big.</p>
+          <a href="#" class="promo-link">Shop Now</a>
+        </div>
+        <span class="promo-discount">-30%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCROLLING PROMO STRIP -->
+<div class="promo-scroll">
+  <div class="promo-scroll-track">
+    <span class="promo-scroll-item">Free Delivery Over $59.99 <span class="bullet">‚óè</span></span>
+    <span class="promo-scroll-item">15% Off First Order <span class="bullet">‚óè</span></span>
+    <span class="promo-scroll-item">New Arrivals Weekly <span class="bullet">‚óè</span></span>
+    <span class="promo-scroll-item">Vet-Approved Nutrition <span class="bullet">‚óè</span></span>
+    <span class="promo-scroll-item">Free Delivery Over $59.99 <span class="bullet">‚óè</span></span>
+    <span class="promo-scroll-item">15% Off First Order <span class="bullet">‚óè</span></span>
+    <span class="promo-scroll-item">New Arrivals Weekly <span class="bullet">‚óè</span></span>
+    <span class="promo-scroll-item">Vet-Approved Nutrition <span class="bullet">‚óè</span></span>
+  </div>
+</div>
+
+<!-- BESTSELLERS -->
+<div class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Our top picks</div>
+      <h2 class="section-title"><span>Bestseller</span> Products</h2>
+    </div>
+    <a href="#" class="see-all">View all ‚Üí</a>
+  </div>
+
+  <div class="products-grid">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <div class="product-img cat-bg">
+        üêü
+        <span class="product-badge">Hot</span>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Dry Food ¬∑ Cats</div>
+        <div class="product-name">Advance Adult Dry Cat Food Salmon</div>
+        <div class="product-footer">
+          <div>
+            <div class="product-price">$78.21</div>
+          </div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <!-- Product 2 -->
+    <div class="product-card">
+      <div class="product-img dog-bg">
+        üêï
+        <span class="product-badge">New</span>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Flea & Tick ¬∑ Dogs</div>
+        <div class="product-name">Advantage Green for Small Dog</div>
+        <div class="product-footer">
+          <div>
+            <div class="product-price">$100.99</div>
+          </div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <!-- Product 3 -->
+    <div class="product-card">
+      <div class="product-img cat-bg">
+        üêà
+        <span class="product-badge sale">-43%</span>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Flea & Tick ¬∑ Cats</div>
+        <div class="product-name">Advantage Small Cat Flea Pipette</div>
+        <div class="product-footer">
+          <div>
+            <div class="product-old-price">$78.97</div>
+            <div class="product-price">$45.01</div>
+          </div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <!-- Product 4 -->
+    <div class="product-card">
+      <div class="product-img" style="background: #F0F8FF;">
+        üê¶
+        <span class="product-badge" style="background: #4CAF50;">Hot</span>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">Food & Treats ¬∑ Birds</div>
+        <div class="product-name">Bird Pro Fortified Parrot Domestic Food</div>
+        <div class="product-footer">
+          <div>
+            <div class="product-price">$44.12</div>
+          </div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FRESH FOOD BANNER -->
+<div class="section" style="padding-top: 0;">
+  <div class="fresh-banner">
+    <div class="fresh-content">
+      <div class="section-tag">Fresh & Natural</div>
+      <h2>The Easiest Way To Feed Fresh</h2>
+      <p>Pet food developed by nutritionists and approved by veterinarians. Fresh ingredients lovingly prepared by hand ‚Äî delicious, balanced, and completely irresistible.</p>
+      <div class="fresh-chips">
+        <div class="fresh-chip">ü•© Real Meat First</div>
+        <div class="fresh-chip">üåø No Preservatives</div>
+        <div class="fresh-chip">ü©∫ Vet Approved</div>
+        <div class="fresh-chip">üöö Free Delivery</div>
+      </div>
+      <div class="fresh-btns" style="margin-top: 28px;">
+        <button class="btn-white">Order Now! ‚Üí</button>
+        <button class="btn-white-ghost">Learn More</button>
+      </div>
+    </div>
+    <div class="fresh-visual">ü•ò</div>
+  </div>
+</div>
+
+<!-- BRANDS -->
+<div class="brands-section">
+  <div class="brands-inner">
+    <p class="brands-title">Trusted Brands We Carry</p>
+    <div class="brands-row">
+      <div class="brand-pill">Royal Canin</div>
+      <div class="brand-pill">Hill's</div>
+      <div class="brand-pill">Purina</div>
+      <div class="brand-pill">Advantage</div>
+      <div class="brand-pill">Catit</div>
+      <div class="brand-pill">Frontline</div>
+      <div class="brand-pill">Pedigree</div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOG -->
+<div class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Pet care tips</div>
+      <h2 class="section-title">Latest from <span>The Blog</span></h2>
+    </div>
+    <a href="#" class="see-all">More articles ‚Üí</a>
+  </div>
+
+  <div class="blog-grid">
+    <div class="blog-card">
+      <div class="blog-img b1">üê∂</div>
+      <div class="blog-body">
+        <div class="blog-meta">
+          <span class="cat-tag">Pets</span>
+          <span>Jun 13, 2025</span>
+        </div>
+        <h3>First Night With Your Puppy: A Survival Guide</h3>
+        <p>Everything you need to know to make your puppy's first night at home calm, comfortable, and loving.</p>
+        <a href="#" class="blog-read">Read more</a>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-img b2">üê±</div>
+      <div class="blog-body">
+        <div class="blog-meta">
+          <span class="cat-tag">Nutrition</span>
+          <span>May 28, 2025</span>
+        </div>
+        <h3>How to Choose the Right Food for Your Senior Cat</h3>
+        <p>Senior cats have unique nutritional needs. Here's what to look for on the label and what to avoid.</p>
+        <a href="#" class="blog-read">Read more</a>
+      </div>
+    </div>
+    <div class="blog-card">
+      <div class="blog-img b3">ü¶¥</div>
+      <div class="blog-body">
+        <div class="blog-meta">
+          <span class="cat-tag">Health</span>
+          <span>May 10, 2025</span>
+        </div>
+        <h3>Flea & Tick Season: Your Complete Prevention Guide</h3>
+        <p>Protect your dog and home before the season hits ‚Äî practical, vet-backed advice for every breed.</p>
+        <a href="#" class="blog-read">Read more</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div style="background: var(--cream); padding: 60px 48px;">
+  <div style="max-width: 560px; margin: 0 auto; text-align: center;">
+    <div class="section-tag" style="margin: 0 auto 16px; display: inline-block;">Stay in the loop</div>
+    <h2 style="font-family: 'Fraunces', serif; font-size: 36px; color: var(--indigo); margin-bottom: 12px;">Get 10% Discount on<br><em>Your First Order</em></h2>
+    <p style="color: var(--text-muted); margin-bottom: 28px; font-size: 15px;">Subscribe for pet care tips, exclusive deals & new arrivals.</p>
+    <div class="newsletter-input-row" style="background: white; border-radius: 32px; padding: 6px; border: 1.5px solid rgba(43,39,99,0.1);">
+      <input type="email" class="newsletter-input" placeholder="Your email address" style="background: transparent; border: none; padding-left: 20px;">
+      <button class="newsletter-btn" style="background: var(--indigo); color: white; padding: 12px 24px;">Subscribe ‚Üí</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">belu<span style="color: var(--pink);">go</span></div>
+        <p>Premium pet products from trusted brands, delivered to your door. Trusted by 50,000+ happy pet owners.</p>
+        <div class="footer-socials">
+          <div class="social-btn">üìò</div>
+          <div class="social-btn">üì∏</div>
+          <div class="social-btn">üê¶</div>
+          <div class="social-btn">‚ñ∂Ô∏è</div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">Dogs</a></li>
+          <li><a href="#">Cats</a></li>
+          <li><a href="#">More Pets</a></li>
+          <li><a href="#">Best Deals</a></li>
+          <li><a href="#">All Brands</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">My Account</a></li>
+          <li><a href="#">Orders & Tracking</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>¬© 2025 Belugo. All rights reserved.</span>
+      <span>üêæ Made with love for pet lovers.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function setTab(btn) {
+    document.querySelectorAll('.pet-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+
+    const cats = {
+      'üêï For Dogs': [
+        { emoji: 'ü¶¥', name: 'Treats', count: '4 products', cls: 'dog-card' },
+        { emoji: 'üéæ', name: 'Toys', count: '4 products', cls: 'dog-card' },
+        { emoji: 'üõÅ', name: 'Supplies', count: '4 products', cls: 'dog-card' },
+        { emoji: 'üêæ', name: 'Leashes', count: '4 products', cls: 'dog-card' },
+        { emoji: 'ü•£', name: 'Food', count: '4 products', cls: 'dog-card' },
+      ],
+      'üêà For Cats': [
+        { emoji: 'üêü', name: 'Treats', count: '4 products', cls: 'cat-card-c' },
+        { emoji: 'üß∂', name: 'Toys', count: '4 products', cls: 'cat-card-c' },
+        { emoji: 'üõèÔ∏è', name: 'Beds', count: '4 products', cls: 'cat-card-c' },
+        { emoji: 'ü™¥', name: 'Litter', count: '4 products', cls: 'cat-card-c' },
+        { emoji: 'ü•õ', name: 'Food', count: '4 products', cls: 'cat-card-c' },
+      ],
+      'ü¶ú More Pets': [
+        { emoji: 'ü¶ú', name: 'Parrots', count: '4 products', cls: 'more-card' },
+        { emoji: 'üêπ', name: 'Rodents', count: '4 products', cls: 'more-card' },
+        { emoji: 'üêü', name: 'Fish', count: '4 products', cls: 'more-card' },
+        { emoji: 'üêá', name: 'Rabbits', count: '4 products', cls: 'more-card' },
+        { emoji: 'ü¶é', name: 'Reptiles', count: '4 products', cls: 'more-card' },
+      ]
+    };
+
+    const grid = document.getElementById('cat-grid');
+    const items = cats[btn.textContent.trim()] || cats['üêï For Dogs'];
+    grid.innerHTML = items.map(i => `
+      <div class="cat-card ${i.cls}" style="animation: fadeUp 0.3s ease forwards">
+        <div class="cat-emoji">${i.emoji}</div>
+        <div class="cat-name">${i.name}</div>
+        <div class="cat-count">${i.count}</div>
+      </div>
+    `).join('');
+  }
+</script>
+
+</body>
+</html>

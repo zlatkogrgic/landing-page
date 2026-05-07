@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camel Grill — Pravi roštilj, pravi okus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D0A06;
+    --surface: #1A1410;
+    --surface2: #241C12;
+    --gold: #C8860A;
+    --gold-light: #E8A830;
+    --gold-pale: rgba(200,134,10,0.12);
+    --cream: #F2E8D4;
+    --muted: #8A7A6A;
+    --border: rgba(200,134,10,0.15);
+    --r-sm: 8px; --r-md: 14px; --r-lg: 22px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--cream); overflow-x: hidden; }
+  h1,h2,h3,h4 { font-family: 'Playfair Display', serif; line-height: 1.15; }
+  a { text-decoration: none; color: inherit; }
+
+  /* NAV */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,10,6,0.92);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(14px);
+    padding: 0 48px;
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--gold-light); }
+  .nav-logo span { color: var(--cream); font-style: italic; }
+  .nav-links { list-style: none; display: flex; gap: 36px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); transition: color 0.2s; letter-spacing: 0.06em; text-transform: uppercase; }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
+  .nav-cta {
+    background: var(--gold); color: var(--bg);
+    padding: 10px 22px; border-radius: var(--r-sm);
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 92vh;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 80px 48px;
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 50%, rgba(200,134,10,0.09) 0%, transparent 65%),
+      radial-gradient(ellipse at 20% 80%, rgba(200,134,10,0.06) 0%, transparent 50%);
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--gold); margin-bottom: 24px;
+  }
+  .hero-tag::before { content: ""; width: 28px; height: 1.5px; background: var(--gold); display: block; }
+  .hero h1 {
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 700; color: var(--cream);
+    margin-bottom: 24px; line-height: 1.08;
+  }
+  .hero h1 em { color: var(--gold-light); font-style: italic; }
+  .hero-sub {
+    font-size: 17px; color: var(--muted); line-height: 1.7;
+    max-width: 460px; margin-bottom: 40px;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--bg);
+    padding: 15px 32px; border-radius: var(--r-sm);
+    font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    border: none; cursor: pointer; display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--cream);
+    padding: 14px 32px; border-radius: var(--r-sm);
+    font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    border: 1.5px solid rgba(242,232,212,0.22); cursor: pointer; display: inline-block;
+    transition: border-color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--cream); }
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 48px;
+    padding-top: 40px; border-top: 1px solid var(--border);
+  }
+  .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--gold-light); }
+  .hero-stat-lbl { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+  /* Hero visual */
+  .hero-visual {
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .hero-visual-bg {
+    width: 420px; height: 420px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,134,10,0.15) 0%, transparent 70%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .hero-emoji-big { font-size: 140px; animation: float 4s ease-in-out infinite; filter: drop-shadow(0 0 40px rgba(200,134,10,0.4)); }
+  .hero-badge {
+    position: absolute; bottom: 40px; right: 20px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px 20px; text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .hero-badge-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--gold-light); display: block; }
+  .hero-badge-txt { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .hero-badge2 {
+    position: absolute; top: 50px; left: 10px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 14px 18px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .hero-badge2 span { font-size: 20px; display: block; margin-bottom: 4px; }
+  .hero-badge2 p { font-size: 12px; font-weight: 600; color: var(--cream); }
+  .hero-badge2 small { font-size: 11px; color: var(--muted); }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+
+  /* MARQUEE STRIP */
+  .strip {
+    background: var(--gold);
+    padding: 12px 0; overflow: hidden; white-space: nowrap;
+  }
+  .strip-track {
+    display: inline-flex;
+    animation: marquee 22s linear infinite;
+    gap: 0;
+  }
+  .strip-item {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 0 36px;
+    font-size: 13px; font-weight: 700; color: var(--bg);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .strip-item .dot { font-size: 10px; opacity: 0.5; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* SEKCIJA: FEATURED */
+  .section { max-width: 1200px; margin: 0 auto; padding: 80px 48px; }
+  .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+  .section-tag {
+    font-size: 11px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.14em; color: var(--gold); display: block; margin-bottom: 10px;
+  }
+  .section-tag::before { content: "— "; }
+  .section-title { font-size: clamp(28px, 3vw, 40px); color: var(--cream); }
+  .section-title span { color: var(--gold-light); font-style: italic; }
+  .see-all {
+    font-size: 13px; font-weight: 600; color: var(--gold);
+    letter-spacing: 0.04em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .see-all:hover { color: var(--gold-light); }
+  /* Menu cards */
+  .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .menu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg); overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+  .menu-card:hover { transform: translateY(-4px); border-color: rgba(200,134,10,0.35); }
+  .menu-card-img {
+    height: 180px; background: var(--surface2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 72px; position: relative;
+  }
+  .menu-card-badge {
+    position: absolute; top: 14px; right: 14px;
+    background: var(--gold); color: var(--bg);
+    padding: 4px 10px; border-radius: 20px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .menu-card-body { padding: 22px; }
+  .menu-card-cat { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .menu-card-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: var(--cream); margin-bottom: 8px; }
+  .menu-card-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 18px; }
+  .menu-card-footer { display: flex; align-items: center; justify-content: space-between; }
+  .menu-card-price { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--gold-light); }
+  .add-btn {
+    width: 36px; height: 36px; background: var(--gold); color: var(--bg);
+    border: none; border-radius: 50%; font-size: 22px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.18s, transform 0.14s;
+  }
+  .add-btn:hover { background: var(--gold-light); transform: scale(1.1); }
+
+  /* O NAMA TEASER */
+  .about-teaser {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    overflow: hidden;
+  }
+  .about-teaser-left {
+    padding: 64px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .about-teaser-left h2 { font-size: 36px; color: var(--cream); margin-bottom: 16px; }
+  .about-teaser-left h2 em { color: var(--gold-light); font-style: italic; }
+  .about-teaser-left p { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 32px; }
+  .about-values { display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px; }
+  .about-val { display: flex; align-items: center; gap: 14px; }
+  .about-val-icon { width: 38px; height: 38px; background: var(--gold-pale); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .about-val-text strong { font-size: 14px; font-weight: 600; color: var(--cream); display: block; }
+  .about-val-text span { font-size: 13px; color: var(--muted); }
+  .about-teaser-right {
+    background: var(--surface2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 120px; position: relative; overflow: hidden;
+  }
+  .about-teaser-right::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at center, rgba(200,134,10,0.12), transparent 65%);
+  }
+
+  /* DELIVERY STRIP */
+  .delivery-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .delivery-inner {
+    max-width: 1200px; margin: 0 auto; padding: 40px 48px;
+    display: flex; align-items: center; justify-content: space-between; gap: 32px;
+  }
+  .delivery-item { display: flex; align-items: center; gap: 16px; }
+  .delivery-icon { font-size: 36px; }
+  .delivery-label { font-size: 14px; color: var(--muted); }
+  .delivery-label strong { font-size: 16px; font-weight: 600; color: var(--cream); display: block; margin-bottom: 2px; }
+  .delivery-divider { width: 1px; height: 48px; background: var(--border); }
+
+  /* CTA BANNER */
+  .cta-banner {
+    background: linear-gradient(135deg, var(--surface2) 0%, #1A1008 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 64px 80px;
+    display: flex; align-items: center; justify-content: space-between; gap: 48px;
+    position: relative; overflow: hidden;
+  }
+  .cta-banner::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 90% 50%, rgba(200,134,10,0.1), transparent 60%);
+  }
+  .cta-content { position: relative; z-index: 1; }
+  .cta-content h2 { font-size: clamp(26px, 3vw, 40px); color: var(--cream); margin-bottom: 12px; }
+  .cta-content h2 em { color: var(--gold-light); font-style: italic; }
+  .cta-content p { font-size: 15px; color: var(--muted); max-width: 500px; }
+  .cta-visual { font-size: 80px; position: relative; z-index: 1; animation: float 4s ease-in-out infinite; filter: drop-shadow(0 0 30px rgba(200,134,10,0.3)); }
+  .cta-actions { display: flex; flex-direction: column; gap: 14px; position: relative; z-index: 1; }
+
+  /* FOOTER */
+  footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 56px 48px 32px;
+  }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top {
+    display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px;
+    padding-bottom: 40px; border-bottom: 1px solid var(--border); margin-bottom: 28px;
+  }
+  .footer-brand .f-logo { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--gold-light); margin-bottom: 12px; }
+  .footer-brand .f-logo span { color: var(--cream); font-style: italic; }
+  .footer-brand p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .footer-col h4 {
+    font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--gold); margin-bottom: 16px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .footer-col ul li a { font-size: 14px; color: var(--muted); transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--cream); }
+  .footer-bottom {
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Camel<span>Grill</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Naslovnica</a></li>
+      <li><a href="meni.html">Meni</a></li>
+      <li><a href="o-nama.html">O nama</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <a href="meni.html" class="nav-cta">Pogledaj meni</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">Pravi roštilj od 2015.</div>
+      <h1>Okus koji se<br><em>pamti.</em></h1>
+      <p class="hero-sub">100% goveđe meso, svježi sastojci i receptura koja ne kompromitira. Roštilj koji govori sam za sebe.</p>
+      <div class="hero-btns">
+        <a href="meni.html" class="btn-primary">Pogledaj meni →</a>
+        <a href="o-nama.html" class="btn-outline">Naša priča</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">10+</div>
+          <div class="hero-stat-lbl">Godina iskustva</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-lbl">Goveđe meso</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">★ 4.8</div>
+          <div class="hero-stat-lbl">Ocjena gostiju</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-visual-bg">
+        <div class="hero-emoji-big">🥩</div>
+        <div class="hero-badge">
+          <span class="hero-badge-num">€6</span>
+          <span class="hero-badge-txt">Dostava od</span>
+        </div>
+        <div class="hero-badge2">
+          <span>🔥</span>
+          <p>Svježe na žaru</p>
+          <small>Pripremljeno na narudžbu</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="strip">
+  <div class="strip-track">
+    <span class="strip-item">🔥 Pravi roštilj <span class="dot">●</span></span>
+    <span class="strip-item">100% goveđe meso <span class="dot">●</span></span>
+    <span class="strip-item">🚚 Dostava u gradu <span class="dot">●</span></span>
+    <span class="strip-item">Otvoreno Pon–Sub 08–22h <span class="dot">●</span></span>
+    <span class="strip-item">🥩 Svježe svaki dan <span class="dot">●</span></span>
+    <span class="strip-item">⭐ Omiljeni restoran kvarta <span class="dot">●</span></span>
+    <span class="strip-item">🔥 Pravi roštilj <span class="dot">●</span></span>
+    <span class="strip-item">100% goveđe meso <span class="dot">●</span></span>
+    <span class="strip-item">🚚 Dostava u gradu <span class="dot">●</span></span>
+    <span class="strip-item">Otvoreno Pon–Sub 08–22h <span class="dot">●</span></span>
+    <span class="strip-item">🥩 Svježe svaki dan <span class="dot">●</span></span>
+    <span class="strip-item">⭐ Omiljeni restoran kvarta <span class="dot">●</span></span>
+  </div>
+</div>
+
+<!-- FEATURED DISHES -->
+<div class="section">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Naši favoriti</div>
+      <h2 class="section-title">Najtraženiji <span>specijaliteti</span></h2>
+    </div>
+    <a href="meni.html" class="see-all">Cijeli meni →</a>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-card-img">
+        🍔
+        <span class="menu-card-badge">Bestseller</span>
+      </div>
+      <div class="menu-card-body">
+        <div class="menu-card-cat">Burgeri</div>
+        <div class="menu-card-name">BBQ Goveđi Burger</div>
+        <div class="menu-card-desc">Ručno oblikovano goveđe meso, BBQ umak, karameliziran luk, svježe povrće.</div>
+        <div class="menu-card-footer">
+          <div class="menu-card-price">€9.00</div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img" style="background: #201810;">
+        🥩
+        <span class="menu-card-badge" style="background: #8B0000; color: #fff;">Popularno</span>
+      </div>
+      <div class="menu-card-body">
+        <div class="menu-card-cat">Roštilj</div>
+        <div class="menu-card-name">Pljeskavica (200g)</div>
+        <div class="menu-card-desc">Klasična goveđa pljeskavica s miješanim začinima, svježe s roštilja.</div>
+        <div class="menu-card-footer">
+          <div class="menu-card-price">€6.50</div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img" style="background: #181A10;">
+        🍢
+        <span class="menu-card-badge" style="background: #2B4A1A; color: #A8D878;">Novo</span>
+      </div>
+      <div class="menu-card-body">
+        <div class="menu-card-cat">Roštilj</div>
+        <div class="menu-card-name">Ćevapi (10 komada)</div>
+        <div class="menu-card-desc">Tradicionalni ćevapi od 100% goveđeg mesa, s lukom i ajvarom.</div>
+        <div class="menu-card-footer">
+          <div class="menu-card-price">€8.50</div>
+          <button class="add-btn">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DOSTAVA -->
+<div class="delivery-section">
+  <div class="delivery-inner">
+    <div class="delivery-item">
+      <div class="delivery-icon">🚚</div>
+      <div class="delivery-label">
+        <strong>Brza dostava</strong>
+        od €6 unutar kvarta
+      </div>
+    </div>
+    <div class="delivery-divider"></div>
+    <div class="delivery-item">
+      <div class="delivery-icon">🥩</div>
+      <div class="delivery-label">
+        <strong>100% goveđe meso</strong>
+        svježe svaki dan
+      </div>
+    </div>
+    <div class="delivery-divider"></div>
+    <div class="delivery-item">
+      <div class="delivery-icon">🕗</div>
+      <div class="delivery-label">
+        <strong>Pon – Sub: 08:00 – 22:00</strong>
+        Ned: 16:00 – 22:00
+      </div>
+    </div>
+    <div class="delivery-divider"></div>
+    <div class="delivery-item">
+      <div class="delivery-icon">⭐</div>
+      <div class="delivery-label">
+        <strong>Ocjena 4.8 / 5</strong>
+        zadovoljnih gostiju
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- O NAMA TEASER -->
+<div class="section">
+  <div class="about-teaser">
+    <div class="about-teaser-left">
+      <div class="section-tag">Naša priča</div>
+      <h2>Roštilj je<br><em>tradicija.</em></h2>
+      <p>Camel Grill osnovan je 2015. s jednom misijom — servirati pravo goveđe meso, pripremljeno s ljubavlju i znanjem. Bez kompromisa u kvaliteti.</p>
+      <div class="about-values">
+        <div class="about-val">
+          <div class="about-val-icon">🥩</div>
+          <div class="about-val-text">
+            <strong>100% goveđe meso</strong>
+            <span>Nikada mješavine, uvijek čisto</span>
+          </div>
+        </div>
+        <div class="about-val">
+          <div class="about-val-icon">🌿</div>
+          <div class="about-val-text">
+            <strong>Svježi sastojci</strong>
+            <span>Dostava svaki dan, bez zamrzavanja</span>
+          </div>
+        </div>
+        <div class="about-val">
+          <div class="about-val-icon">👨‍🍳</div>
+          <div class="about-val-text">
+            <strong>Iskusni kuhači</strong>
+            <span>Desetljeće na roštilju</span>
+          </div>
+        </div>
+      </div>
+      <a href="o-nama.html" class="btn-primary" style="align-self: flex-start;">Saznaj više o nama</a>
+    </div>
+    <div class="about-teaser-right">🔥</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="section" style="padding-top: 0;">
+  <div class="cta-banner">
+    <div class="cta-content">
+      <div class="section-tag">Naruči odmah</div>
+      <h2>Glad ne čeka.<br><em>Mi ni ne čekamo.</em></h2>
+      <p>Dostava unutar kvarta od €6. Naruči telefonski ili dođi osobno — uvijek si dobrodošao.</p>
+    </div>
+    <div class="cta-visual">🛵</div>
+    <div class="cta-actions">
+      <a href="meni.html" class="btn-primary">Pogledaj meni →</a>
+      <a href="kontakt.html" class="btn-outline">Kontakt info</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="f-logo">Camel<span>Grill</span></div>
+        <p>Autentičan okus roštilja od 2015. godine.<br>100% goveđe meso, svježi sastojci, brza dostava.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Stranice</h4>
+        <ul>
+          <li><a href="index.html">Naslovnica</a></li>
+          <li><a href="meni.html">Meni</a></li>
+          <li><a href="o-nama.html">O nama</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Radno vrijeme</h4>
+        <ul>
+          <li><a href="#">Pon – Sub: 08:00 – 22:00</a></li>
+          <li><a href="#">Nedjelja: 16:00 – 22:00</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="mailto:info@camelgrill.com">info@camelgrill.com</a></li>
+          <li><a href="kontakt.html">Pošalji upit</a></li>
+          <li><a href="kontakt.html">Dostava</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Camel Grill. Sva prava pridržana.</span>
+      <span>🔥 Pravi roštilj, pravi okus.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

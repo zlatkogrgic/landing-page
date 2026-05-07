@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meni — Camel Grill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D0A06; --surface: #1A1410; --surface2: #241C12;
+    --gold: #C8860A; --gold-light: #E8A830; --gold-pale: rgba(200,134,10,0.12);
+    --cream: #F2E8D4; --muted: #8A7A6A; --border: rgba(200,134,10,0.15);
+    --r-sm: 8px; --r-md: 14px; --r-lg: 22px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--cream); overflow-x: hidden; }
+  h1,h2,h3,h4 { font-family: 'Playfair Display', serif; line-height: 1.15; }
+  a { text-decoration: none; color: inherit; }
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,10,6,0.92); border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(14px); padding: 0 48px;
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; height: 68px;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--gold-light); }
+  .nav-logo span { color: var(--cream); font-style: italic; }
+  .nav-links { list-style: none; display: flex; gap: 36px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); transition: color 0.2s; letter-spacing: 0.06em; text-transform: uppercase; }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
+  .nav-cta {
+    background: var(--gold); color: var(--bg);
+    padding: 10px 22px; border-radius: var(--r-sm);
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* PAGE HERO */
+  .page-hero {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 64px 48px 56px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .page-hero::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(200,134,10,0.1), transparent 60%);
+  }
+  .page-hero .section-tag { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); display: block; margin-bottom: 14px; }
+  .page-hero .section-tag::before { content: "— "; }
+  .page-hero h1 { font-size: clamp(36px, 5vw, 60px); color: var(--cream); position: relative; z-index: 1; }
+  .page-hero h1 em { color: var(--gold-light); font-style: italic; }
+  .page-hero p { font-size: 16px; color: var(--muted); margin-top: 14px; position: relative; z-index: 1; }
+
+  /* FILTER TABS */
+  .menu-filters {
+    max-width: 1200px; margin: 0 auto; padding: 40px 48px 0;
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .filter-btn {
+    background: var(--surface); border: 1.5px solid var(--border);
+    color: var(--muted); padding: 10px 22px; border-radius: 30px;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--gold); border-color: var(--gold); color: var(--bg);
+  }
+
+  /* MENU SECTION */
+  .menu-section { max-width: 1200px; margin: 0 auto; padding: 56px 48px; }
+  .cat-title {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 32px;
+  }
+  .cat-title h2 { font-size: 30px; color: var(--cream); }
+  .cat-title h2 span { color: var(--gold-light); font-style: italic; }
+  .cat-title-line { flex: 1; height: 1px; background: var(--border); }
+  .cat-emoji { font-size: 28px; }
+
+  /* LIST-STYLE ITEMS */
+  .menu-list { display: flex; flex-direction: column; gap: 1px; margin-bottom: 56px; }
+  .menu-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 20px 28px;
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center; gap: 32px;
+    transition: border-color 0.2s, background 0.2s;
+    margin-bottom: 8px;
+  }
+  .menu-item:hover { border-color: rgba(200,134,10,0.4); background: #1E1810; }
+  .menu-item-left { display: flex; align-items: center; gap: 18px; }
+  .menu-item-emoji { font-size: 28px; width: 48px; text-align: center; flex-shrink: 0; }
+  .menu-item-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: var(--cream); margin-bottom: 4px; }
+  .menu-item-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .menu-item-right { display: flex; align-items: center; gap: 16px; }
+  .menu-item-badge {
+    font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .badge-hot { background: rgba(200,80,20,0.2); color: #E85030; border: 1px solid rgba(200,80,20,0.3); }
+  .badge-new { background: rgba(40,160,80,0.15); color: #60C870; border: 1px solid rgba(40,160,80,0.25); }
+  .badge-popular { background: var(--gold-pale); color: var(--gold-light); border: 1px solid rgba(200,134,10,0.3); }
+  .menu-item-price { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--gold-light); white-space: nowrap; min-width: 60px; text-align: right; }
+  .menu-item-add {
+    width: 34px; height: 34px; background: var(--gold); color: var(--bg);
+    border: none; border-radius: 50%; font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.18s, transform 0.14s; flex-shrink: 0;
+  }
+  .menu-item-add:hover { background: var(--gold-light); transform: scale(1.1); }
+
+  /* NOTE BOX */
+  .menu-note {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-left: 3px solid var(--gold); border-radius: var(--r-sm);
+    padding: 16px 20px; margin-top: 32px;
+    font-size: 13px; color: var(--muted); line-height: 1.6;
+  }
+  .menu-note strong { color: var(--gold-light); }
+
+  /* FOOTER */
+  footer { background: var(--surface); border-top: 1px solid var(--border); padding: 56px 48px 32px; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; }
+  .footer-top {
+    display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px;
+    padding-bottom: 40px; border-bottom: 1px solid var(--border); margin-bottom: 28px;
+  }
+  .footer-brand .f-logo { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--gold-light); margin-bottom: 12px; }
+  .footer-brand .f-logo span { color: var(--cream); font-style: italic; }
+  .footer-brand p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+  .footer-col h4 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 16px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .footer-col ul li a { font-size: 14px; color: var(--muted); transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--cream); }
+  .footer-bottom { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Camel<span>Grill</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Naslovnica</a></li>
+      <li><a href="meni.html" class="active">Meni</a></li>
+      <li><a href="o-nama.html">O nama</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <a href="kontakt.html" class="nav-cta">Naruči dostavu</a>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="section-tag">Što nudimo</div>
+  <h1>Naš <em>meni</em></h1>
+  <p>Sve pripremljeno od 100% goveđeg mesa — svježe, ukusno, bez kompromisa.</p>
+</div>
+
+<div class="menu-filters">
+  <button class="filter-btn active" onclick="filterMenu(this,'all')">Sve</button>
+  <button class="filter-btn" onclick="filterMenu(this,'rostilj')">🔥 Roštilj</button>
+  <button class="filter-btn" onclick="filterMenu(this,'burgeri')">🍔 Burgeri</button>
+  <button class="filter-btn" onclick="filterMenu(this,'dodaci')">🥗 Dodaci</button>
+  <button class="filter-btn" onclick="filterMenu(this,'pica')">🥤 Pića</button>
+</div>
+
+<div class="menu-section">
+
+  <!-- ROŠTILJ -->
+  <div class="cat-section" data-cat="rostilj">
+    <div class="cat-title">
+      <span class="cat-emoji">🔥</span>
+      <h2>S <span>roštilja</span></h2>
+      <div class="cat-title-line"></div>
+    </div>
+    <div class="menu-list">
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🥩</div>
+          <div>
+            <div class="menu-item-name">Pljeskavica (100g)</div>
+            <div class="menu-item-desc">Klasična goveđa pljeskavica s miješanim začinima</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">€3.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🥩</div>
+          <div>
+            <div class="menu-item-name">Pljeskavica (200g)</div>
+            <div class="menu-item-desc">Veća pljeskavica od 100% goveđeg mesa, svježe s roštilja</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <span class="menu-item-badge badge-popular">Popularno</span>
+          <div class="menu-item-price">€6.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🧀</div>
+          <div>
+            <div class="menu-item-name">Pljeskavica sa sirom (200g)</div>
+            <div class="menu-item-desc">Pljeskavica punjena rastopljenim sirom iznutra</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <span class="menu-item-badge badge-hot">🔥 Hot</span>
+          <div class="menu-item-price">€7.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🍢</div>
+          <div>
+            <div class="menu-item-name">Ćevapi (5 komada)</div>
+            <div class="menu-item-desc">Tradicionalni ćevapi od čistog goveđeg mesa</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">€4.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🍢</div>
+          <div>
+            <div class="menu-item-name">Ćevapi (10 komada)</div>
+            <div class="menu-item-desc">Veća porcija s lukom, ajvarom i lepinjom</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <span class="menu-item-badge badge-popular">Bestseller</span>
+          <div class="menu-item-price">€8.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🍽️</div>
+          <div>
+            <div class="menu-item-name">Mješani roštilj (200g)</div>
+            <div class="menu-item-desc">Pljeskavica + 5 ćevapa + prilog po izboru</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <span class="menu-item-badge badge-new">Novo</span>
+          <div class="menu-item-price">€10.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🥩</div>
+          <div>
+            <div class="menu-item-name">Goveđi biftek (200g)</div>
+            <div class="menu-item-desc">Premium goveđi biftek, pripremljen po narudžbi</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">€12.00</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BURGERI -->
+  <div class="cat-section" data-cat="burgeri">
+    <div class="cat-title">
+      <span class="cat-emoji">🍔</span>
+      <h2>Naši <span>burgeri</span></h2>
+      <div class="cat-title-line"></div>
+    </div>
+    <div class="menu-list">
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🍔</div>
+          <div>
+            <div class="menu-item-name">Classic Burger</div>
+            <div class="menu-item-desc">Goveđi patty, zelena salata, rajčica, krastavac, majoneza</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">€7.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🧀</div>
+          <div>
+            <div class="menu-item-name">Cheeseburger</div>
+            <div class="menu-item-desc">Classic burger + topljeni cheddar, kiseli krastavci, senf</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <span class="menu-item-badge badge-popular">Popularan</span>
+          <div class="menu-item-price">€8.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🔥</div>
+          <div>
+            <div class="menu-item-name">BBQ Burger</div>
+            <div class="menu-item-desc">Goveđi patty, BBQ umak, karameliziran luk, slanina, cheddar</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <span class="menu-item-badge badge-hot">🔥 Hot</span>
+          <div class="menu-item-price">€9.00</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🍔</div>
+          <div>
+            <div class="menu-item-name">Double Burger</div>
+            <div class="menu-item-desc">Dva pattyja od goveđeg mesa, dupli sir, special umak</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">€10.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DODACI -->
+  <div class="cat-section" data-cat="dodaci">
+    <div class="cat-title">
+      <span class="cat-emoji">🥗</span>
+      <h2><span>Dodaci</span> i salate</h2>
+      <div class="cat-title-line"></div>
+    </div>
+    <div class="menu-list">
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🍟</div>
+          <div>
+            <div class="menu-item-name">Pomfrit</div>
+            <div class="menu-item-desc">Hrskav pomfrit, posut morskom soli</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">€2.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🧅</div>
+          <div>
+            <div class="menu-item-name">Pohani luk (onion rings)</div>
+            <div class="menu-item-desc">Hrskavi prstenovi pohana luka</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">€2.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🥗</div>
+          <div>
+            <div class="menu-item-name">Coleslaw salata</div>
+            <div class="menu-item-desc">Svježi kupus, mrkva, kremasta salata</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">€2.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🥒</div>
+          <div>
+            <div class="menu-item-name">Kiseli krastavci</div>
+            <div class="menu-item-desc">Klasičan domaći prilog uz roštilj</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">€1.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🫙</div>
+          <div>
+            <div class="menu-item-name">Umak (150 ml)</div>
+            <div class="menu-item-desc">BBQ, majoneza, ketchup, ajvar — po izboru</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">€1.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIĆA -->
+  <div class="cat-section" data-cat="pica">
+    <div class="cat-title">
+      <span class="cat-emoji">🥤</span>
+      <h2>Bezalkoholna <span>pića</span></h2>
+      <div class="cat-title-line"></div>
+    </div>
+    <div class="menu-list">
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">💧</div>
+          <div>
+            <div class="menu-item-name">Voda (0.5L)</div>
+            <div class="menu-item-desc">Mineralna ili negazirana</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">€1.00</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🥤</div>
+          <div>
+            <div class="menu-item-name">Gazirani sok (0.33L)</div>
+            <div class="menu-item-desc">Coca-Cola, Fanta, Sprite</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">€1.50</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🧃</div>
+          <div>
+            <div class="menu-item-name">Ledeni čaj (0.5L)</div>
+            <div class="menu-item-desc">Breskva ili limun</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">€2.00</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-left">
+          <div class="menu-item-emoji">🍊</div>
+          <div>
+            <div class="menu-item-name">Svježe cijeđeni sok</div>
+            <div class="menu-item-desc">Naranča ili limun, 0.3L</div>
+          </div>
+        </div>
+        <div class="menu-item-right">
+          <span class="menu-item-badge badge-new">Svježe</span>
+          <div class="menu-item-price">€3.00</div>
+          <button class="menu-item-add">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-note">
+    <strong>Napomena:</strong> Svi naši proizvodi od mesa pripremaju se isključivo od <strong>100% goveđeg mesa</strong>.
+    Za alergene i posebne zahtjeve molimo kontaktirajte nas na <strong>info@camelgrill.com</strong> ili osobno.
+    Dostava od <strong>€6</strong> (unutar kvarta) i <strong>€7</strong> (izvan kvarta). Minimalna narudžba za dostavu <strong>€15</strong>.
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="f-logo">Camel<span>Grill</span></div>
+        <p>Autentičan okus roštilja od 2015. godine.<br>100% goveđe meso, svježi sastojci, brza dostava.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Stranice</h4>
+        <ul>
+          <li><a href="index.html">Naslovnica</a></li>
+          <li><a href="meni.html">Meni</a></li>
+          <li><a href="o-nama.html">O nama</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Radno vrijeme</h4>
+        <ul>
+          <li><a href="#">Pon – Sub: 08:00 – 22:00</a></li>
+          <li><a href="#">Nedjelja: 16:00 – 22:00</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="mailto:info@camelgrill.com">info@camelgrill.com</a></li>
+          <li><a href="kontakt.html">Pošalji upit</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Camel Grill. Sva prava pridržana.</span>
+      <span>🔥 Pravi roštilj, pravi okus.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function filterMenu(btn, cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cat-section').forEach(s => {
+    s.style.display = (cat === 'all' || s.dataset.cat === cat) ? 'block' : 'none';
+  });
+}
+</script>
+</body>
+</html>

@@ -38,8 +38,8 @@
     display: flex; align-items: center; justify-content: space-between;
     height: 68px;
   }
-  .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--gold-light); }
-  .nav-logo span { color: var(--cream); font-style: italic; }
+  .nav-logo { display: flex; align-items: center; }
+  .nav-logo img { height: 50px; display: block; }
   .nav-links { list-style: none; display: flex; gap: 36px; }
   .nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); transition: color 0.2s; letter-spacing: 0.06em; text-transform: uppercase; }
   .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
@@ -311,7 +311,7 @@
 
 <header>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Camel<span>Grill</span></a>
+    <a href="index.html" class="nav-logo"><img src="data:image/jpeg;base64,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" alt="Camel Grill" style="height:50px;display:block;"></a>
     <ul class="nav-links">
       <li><a href="index.html" class="active">Naslovnica</a></li>
       <li><a href="meni.html">Meni</a></li>
@@ -394,46 +394,46 @@
   </div>
   <div class="menu-grid">
     <div class="menu-card">
-      <div class="menu-card-img">
-        🍔
-        <span class="menu-card-badge">Bestseller</span>
+      <div class="menu-card-img" style="background: #1C1208;">
+        🍢
+        <span class="menu-card-badge" style="background: #8B0000; color: #fff;">Popularno</span>
       </div>
       <div class="menu-card-body">
-        <div class="menu-card-cat">Burgeri</div>
-        <div class="menu-card-name">BBQ Goveđi Burger</div>
-        <div class="menu-card-desc">Ručno oblikovano goveđe meso, BBQ umak, karameliziran luk, svježe povrće.</div>
+        <div class="menu-card-cat">Roštilj</div>
+        <div class="menu-card-name">Veliki ćevapi</div>
+        <div class="menu-card-desc">10 ćevapčića od 100% goveđeg mesa, s lukom i ajvarom.</div>
         <div class="menu-card-footer">
-          <div class="menu-card-price">€9.00</div>
+          <div class="menu-card-price">8,50 €</div>
           <button class="add-btn">+</button>
         </div>
       </div>
     </div>
     <div class="menu-card">
       <div class="menu-card-img" style="background: #201810;">
-        🥩
-        <span class="menu-card-badge" style="background: #8B0000; color: #fff;">Popularno</span>
+        🍽️
+        <span class="menu-card-badge">Specijalitet</span>
       </div>
       <div class="menu-card-body">
-        <div class="menu-card-cat">Roštilj</div>
-        <div class="menu-card-name">Pljeskavica (200g)</div>
-        <div class="menu-card-desc">Klasična goveđa pljeskavica s miješanim začinima, svježe s roštilja.</div>
+        <div class="menu-card-cat">Kombinacije</div>
+        <div class="menu-card-name">Miješano za 1 osobu</div>
+        <div class="menu-card-desc">Kombinacija ćevapa, pljeskavice i pilećeg mesa s roštilja — puni tanjur za pravog gurmana.</div>
         <div class="menu-card-footer">
-          <div class="menu-card-price">€6.50</div>
+          <div class="menu-card-price">13,00 €</div>
           <button class="add-btn">+</button>
         </div>
       </div>
     </div>
     <div class="menu-card">
       <div class="menu-card-img" style="background: #181A10;">
-        🍢
+        🍔
         <span class="menu-card-badge" style="background: #2B4A1A; color: #A8D878;">Novo</span>
       </div>
       <div class="menu-card-body">
-        <div class="menu-card-cat">Roštilj</div>
-        <div class="menu-card-name">Ćevapi (10 komada)</div>
-        <div class="menu-card-desc">Tradicionalni ćevapi od 100% goveđeg mesa, s lukom i ajvarom.</div>
+        <div class="menu-card-cat">Burgeri</div>
+        <div class="menu-card-name">Grill chicken burger</div>
+        <div class="menu-card-desc">Sočni pileći file s roštilja, svježe povrće, umak po izboru — pravi burgaš na naš način.</div>
         <div class="menu-card-footer">
-          <div class="menu-card-price">€8.50</div>
+          <div class="menu-card-price">7,00 €</div>
           <button class="add-btn">+</button>
         </div>
       </div>

@@ -25,8 +25,7 @@
     backdrop-filter: blur(14px); padding: 0 48px;
   }
   .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 68px; }
-  .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--gold-light); }
-  .nav-logo span { color: var(--cream); font-style: italic; }
+  .nav-logo img { height: 50px; display: block; }
   .nav-links { list-style: none; display: flex; gap: 32px; }
   .nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); transition: color 0.2s; letter-spacing: 0.05em; text-transform: uppercase; }
   .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
@@ -82,11 +81,6 @@
   .cat-title h2 { font-size: 26px; color: var(--cream); }
   .cat-title h2 span { color: var(--gold-light); font-style: italic; }
   .cat-desc { font-size: 13px; color: var(--muted); margin-left: auto; }
-  .cat-new-badge {
-    background: var(--gold); color: var(--bg);
-    font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
-    text-transform: uppercase; letter-spacing: 0.08em; margin-left: 10px;
-  }
 
   /* MENU ITEMS */
   .menu-list { display: flex; flex-direction: column; gap: 6px; }
@@ -106,26 +100,22 @@
   }
   .badge-novo { background: rgba(40,160,80,0.15); color: #60C870; border: 1px solid rgba(40,160,80,0.25); }
   .badge-popular { background: var(--gold-pale); color: var(--gold-light); border: 1px solid rgba(200,134,10,0.3); }
-  .menu-item-price { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--gold-light); white-space: nowrap; min-width: 52px; text-align: right; }
+  .menu-item-price { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--gold-light); white-space: nowrap; min-width: 58px; text-align: right; }
 
-  /* 2-COL GRID for smaller items */
+  /* 2-COL GRID */
   .menu-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 
-  /* COMBO highlight */
+  /* COMBO / HIGHLIGHT */
   .menu-item.combo { background: #1C1508; border-color: rgba(200,134,10,0.25); }
   .menu-item.combo:hover { border-color: rgba(200,134,10,0.5); }
-  .menu-item.highlight {
-    background: linear-gradient(135deg, #1C1508, #201408);
-    border-color: rgba(200,134,10,0.3);
-  }
+  .menu-item.highlight { background: linear-gradient(135deg, #1C1508, #201408); border-color: rgba(200,134,10,0.3); }
 
   /* BOTTOM NOTE */
   .menu-note {
     background: var(--surface2); border: 1px solid var(--border);
     border-left: 3px solid var(--gold); border-radius: var(--r-sm);
-    padding: 16px 20px; margin: 0 48px 48px;
-    max-width: 1200px; margin-left: auto; margin-right: auto;
-    font-size: 13px; color: var(--muted); line-height: 1.7;
+    padding: 16px 20px; margin: 0 auto 48px;
+    max-width: 1200px; font-size: 13px; color: var(--muted); line-height: 1.7;
   }
   .menu-note strong { color: var(--gold-light); }
 
@@ -133,35 +123,47 @@
   footer { background: var(--surface); border-top: 1px solid var(--border); padding: 56px 48px 32px; }
   .footer-inner { max-width: 1200px; margin: 0 auto; }
   .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 40px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
-  .footer-brand .f-logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--gold-light); margin-bottom: 10px; }
-  .footer-brand .f-logo span { color: var(--cream); font-style: italic; }
+  .footer-brand .f-logo img { height: 44px; margin-bottom: 10px; }
   .footer-brand p { font-size: 13px; color: var(--muted); line-height: 1.7; }
   .footer-col h4 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 14px; }
   .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
   .footer-col ul li a { font-size: 13px; color: var(--muted); transition: color 0.2s; }
   .footer-col ul li a:hover { color: var(--cream); }
   .footer-bottom { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+
+  @media(max-width: 768px) {
+    header { padding: 0 20px; }
+    .nav-links { display: none; }
+    .page-hero { padding: 48px 20px 36px; }
+    .delivery-notice { margin: 20px 20px 0; }
+    .menu-filters { padding: 24px 20px 0; }
+    .menu-section { padding: 32px 20px 0; }
+    .menu-grid-2 { grid-template-columns: 1fr; }
+    .menu-note { margin: 0 20px 40px; }
+    footer { padding: 40px 20px 24px; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
+  }
 </style>
 </head>
 <body>
 
 <header>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><img src="data:image/jpeg;base64,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" alt="Camel Grill" style="height:44px;border-radius:6px;padding:3px 6px;background:#fff;"></a>
+    <a href="index.html" class="nav-logo"><img src="data:image/jpeg;base64,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" alt="Camel Grill"></a>
     <ul class="nav-links">
       <li><a href="index.html">Naslovnica</a></li>
       <li><a href="o-nama.html">O nama</a></li>
       <li><a href="meni.html" class="active">Cjenik</a></li>
       <li><a href="kontakt.html">Kontakt</a></li>
     </ul>
-    <a href="kontakt.html" class="nav-cta">Naruči: 01 7879 250</a>
+    <a href="tel:+38517879250" class="nav-cta">Naruči: 01 7879 250</a>
   </div>
 </header>
 
 <div class="page-hero">
   <div class="section-tag">Ponuda iz cjenika</div>
   <h1>Naš <em>cjenik</em></h1>
-  <p>Jela od 100% junećeg mesa koja garantiraju kvalitetu i slasan zalogaj. Dostava svaki radni dan uključujući nedjelju!</p>
+  <p>Jela od 100% junećeg mesa koja garantiraju kvalitetu i slasan zalogaj. Dostava svaki dan uključujući nedjelju!</p>
 </div>
 
 <div class="delivery-notice">
@@ -171,6 +173,7 @@
 <div class="menu-filters">
   <button class="filter-btn active" onclick="filterMenu(this,'all')">Sve</button>
   <button class="filter-btn" onclick="filterMenu(this,'rostilj')">🥩 Roštilj</button>
+  <button class="filter-btn" onclick="filterMenu(this,'wraps')">🌯 Wraps</button>
   <button class="filter-btn" onclick="filterMenu(this,'menu')">🍱 Menu paketi</button>
   <button class="filter-btn" onclick="filterMenu(this,'piletina')">🍗 Piletina</button>
   <button class="filter-btn" onclick="filterMenu(this,'kombinacije')">🍽️ Kombinacije</button>
@@ -181,7 +184,7 @@
 
 <div class="menu-section">
 
-  <!-- JELA SA ROŠTILJA (goveđe) -->
+  <!-- ROŠTILJ -->
   <div class="cat-block" data-cat="rostilj">
     <div class="cat-title">
       <span class="cat-emoji">🥩</span>
@@ -196,7 +199,7 @@
         </div>
         <div class="menu-item-right">
           <span class="menu-item-badge badge-popular">Popularno</span>
-          <div class="menu-item-price">7,90 €</div>
+          <div class="menu-item-price">8,50 €</div>
         </div>
       </div>
       <div class="menu-item">
@@ -205,7 +208,7 @@
           <div class="menu-item-desc">7 komada, lepinja, luk</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">7,20 €</div>
+          <div class="menu-item-price">7,50 €</div>
         </div>
       </div>
       <div class="menu-item">
@@ -223,7 +226,7 @@
           <div class="menu-item-desc">3 štapa, lepinja, luk</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">9,00 €</div>
+          <div class="menu-item-price">9,50 €</div>
         </div>
       </div>
       <div class="menu-item">
@@ -232,7 +235,43 @@
           <div class="menu-item-desc">2 štapa, lepinja, luk</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">8,00 €</div>
+          <div class="menu-item-price">8,50 €</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Pljeskavica sa sirom</div>
+          <div class="menu-item-desc">Lepinja, luk</div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">10,00 €</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Pljeskavica šunka + sir</div>
+          <div class="menu-item-desc">Lepinja, luk</div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">10,50 €</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Pljeskavica kajmak + šunka</div>
+          <div class="menu-item-desc">Lepinja, luk</div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">10,50 €</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Kobasice</div>
+          <div class="menu-item-desc">Lepinja, luk</div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">10,00 €</div>
         </div>
       </div>
       <div class="menu-item">
@@ -241,7 +280,7 @@
           <div class="menu-item-desc">Juneće meso, lepinja</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">6,00 €</div>
+          <div class="menu-item-price">6,50 €</div>
         </div>
       </div>
       <div class="menu-item">
@@ -250,44 +289,72 @@
           <div class="menu-item-desc">Juneće meso, sir, lepinja</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">6,50 €</div>
+          <div class="menu-item-price">7,00 €</div>
         </div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
-          <div class="menu-item-name">Pljeskavica</div>
-          <div class="menu-item-desc">Lepinja, luk</div>
+          <div class="menu-item-name">Grill chicken burger</div>
+          <div class="menu-item-desc">Lepinja</div>
         </div>
         <div class="menu-item-right">
-          <span class="menu-item-badge badge-popular">Bestseller</span>
-          <div class="menu-item-price">8,50 €</div>
+          <div class="menu-item-price">7,00 €</div>
         </div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
-          <div class="menu-item-name">Pljeskavica punjena sa sirom</div>
-          <div class="menu-item-desc">Lepinja, luk</div>
+          <div class="menu-item-name">Pohani pileći sendvič</div>
+          <div class="menu-item-desc">Lepinja</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">9,50 €</div>
+          <div class="menu-item-price">7,00 €</div>
         </div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
-          <div class="menu-item-name">Pljeskavica punjena sa šunkom i sirom</div>
-          <div class="menu-item-desc">Lepinja, luk</div>
+          <div class="menu-item-name">Grill chicken burger sa sirom</div>
+          <div class="menu-item-desc">Lepinja, sir</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">10,00 €</div>
+          <div class="menu-item-price">7,50 €</div>
         </div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
-          <div class="menu-item-name">Pljeskavica punjena sa kajmakom i šunkom</div>
-          <div class="menu-item-desc">Lepinja, luk</div>
+          <div class="menu-item-name">Pohani pileći sendvič sa sirom</div>
+          <div class="menu-item-desc">Lepinja, sir</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">10,00 €</div>
+          <div class="menu-item-price">7,50 €</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WRAPS -->
+  <div class="cat-block" data-cat="wraps">
+    <div class="cat-title">
+      <span class="cat-emoji">🌯</span>
+      <h2><span>Wraps</span></h2>
+      <span class="cat-new-badge" style="background:var(--gold);color:#0D0A06;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.08em;">Novo</span>
+    </div>
+    <div class="menu-list">
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Ćevap Wrap</div>
+        </div>
+        <div class="menu-item-right">
+          <span class="menu-item-badge badge-novo">Novo</span>
+          <div class="menu-item-price">7,50 €</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Pileći Wrap</div>
+        </div>
+        <div class="menu-item-right">
+          <span class="menu-item-badge badge-novo">Novo</span>
+          <div class="menu-item-price">7,50 €</div>
         </div>
       </div>
     </div>
@@ -303,17 +370,8 @@
     <div class="menu-list">
       <div class="menu-item combo">
         <div class="menu-item-info">
-          <div class="menu-item-name">Hamburger menu</div>
+          <div class="menu-item-name">Hamburger meni</div>
           <div class="menu-item-desc">Hamburger, pomfrit, Cola 0,33L</div>
-        </div>
-        <div class="menu-item-right">
-          <div class="menu-item-price">8,50 €</div>
-        </div>
-      </div>
-      <div class="menu-item combo">
-        <div class="menu-item-info">
-          <div class="menu-item-name">Cheeseburger menu</div>
-          <div class="menu-item-desc">Cheeseburger, pomfrit, Cola 0,33L</div>
         </div>
         <div class="menu-item-right">
           <div class="menu-item-price">9,00 €</div>
@@ -321,18 +379,8 @@
       </div>
       <div class="menu-item combo">
         <div class="menu-item-info">
-          <div class="menu-item-name">Veliki ćevapi menu</div>
-          <div class="menu-item-desc">Veliki ćevapi, ajvar, Cola 0,33L</div>
-        </div>
-        <div class="menu-item-right">
-          <span class="menu-item-badge badge-popular">Popularno</span>
-          <div class="menu-item-price">10,40 €</div>
-        </div>
-      </div>
-      <div class="menu-item combo">
-        <div class="menu-item-info">
-          <div class="menu-item-name">Pohani pileći sendvič menu</div>
-          <div class="menu-item-desc">Pohani pileći sendvič, pomfrit, Cola 0,33L</div>
+          <div class="menu-item-name">Cheeseburger meni</div>
+          <div class="menu-item-desc">Cheeseburger, pomfrit, Cola 0,33L</div>
         </div>
         <div class="menu-item-right">
           <div class="menu-item-price">9,50 €</div>
@@ -340,11 +388,30 @@
       </div>
       <div class="menu-item combo">
         <div class="menu-item-info">
-          <div class="menu-item-name">Pileći sendvič menu</div>
-          <div class="menu-item-desc">Pileći sendvič, pomfrit, Cola 0,33L</div>
+          <div class="menu-item-name">Ćevapi meni</div>
+          <div class="menu-item-desc">Ćevapi, pomfrit, Cola 0,33L</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">9,00 €</div>
+          <span class="menu-item-badge badge-popular">Popularno</span>
+          <div class="menu-item-price">10,90 €</div>
+        </div>
+      </div>
+      <div class="menu-item combo">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Chicken burger meni</div>
+          <div class="menu-item-desc">Chicken burger, pomfrit, Cola 0,33L</div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">10,00 €</div>
+        </div>
+      </div>
+      <div class="menu-item combo">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Grilled chicken burger meni</div>
+          <div class="menu-item-desc">Grilled chicken burger, pomfrit, Cola 0,33L</div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">9,50 €</div>
         </div>
       </div>
     </div>
@@ -354,52 +421,16 @@
   <div class="cat-block" data-cat="piletina">
     <div class="cat-title">
       <span class="cat-emoji">🍗</span>
-      <h2>Jela sa roštilja — <span>piletina</span></h2>
+      <h2>Jela — <span>piletina</span></h2>
     </div>
     <div class="menu-list">
-      <div class="menu-item">
-        <div class="menu-item-info">
-          <div class="menu-item-name">Pileći sendvič</div>
-          <div class="menu-item-desc">Lepinja, luk</div>
-        </div>
-        <div class="menu-item-right">
-          <div class="menu-item-price">6,50 €</div>
-        </div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-item-info">
-          <div class="menu-item-name">Pohani pileći sendvič</div>
-          <div class="menu-item-desc">Lepinja, luk</div>
-        </div>
-        <div class="menu-item-right">
-          <div class="menu-item-price">6,50 €</div>
-        </div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-item-info">
-          <div class="menu-item-name">Pileći sendvič sa sirom</div>
-          <div class="menu-item-desc">Lepinja, luk</div>
-        </div>
-        <div class="menu-item-right">
-          <div class="menu-item-price">7,00 €</div>
-        </div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-item-info">
-          <div class="menu-item-name">Pohani pileći sendvič sa sirom</div>
-          <div class="menu-item-desc">Lepinja, luk</div>
-        </div>
-        <div class="menu-item-right">
-          <div class="menu-item-price">7,00 €</div>
-        </div>
-      </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <div class="menu-item-name">Pileći ražnjići</div>
           <div class="menu-item-desc">3 štapa, lepinja, luk</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">9,00 €</div>
+          <div class="menu-item-price">9,50 €</div>
         </div>
       </div>
       <div class="menu-item">
@@ -408,7 +439,7 @@
           <div class="menu-item-desc">Lepinja, luk</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">8,50 €</div>
+          <div class="menu-item-price">9,00 €</div>
         </div>
       </div>
       <div class="menu-item">
@@ -417,16 +448,34 @@
           <div class="menu-item-desc">Lepinja, luk</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">9,50 €</div>
+          <div class="menu-item-price">10,00 €</div>
         </div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <div class="menu-item-name">Pileći pohani prutići</div>
-          <div class="menu-item-desc">Pommes i umak po izboru</div>
+          <div class="menu-item-desc">Chicken Fingers, umak po izboru</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">8,50 €</div>
+          <div class="menu-item-price">10,00 €</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Zagrebački odrezak</div>
+          <div class="menu-item-desc">Lepinja, pomfrit, tartar, limun</div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">11,00 €</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Bečki odrezak</div>
+          <div class="menu-item-desc">Lepinja, pomfrit, tartar, limun</div>
+        </div>
+        <div class="menu-item-right">
+          <div class="menu-item-price">10,50 €</div>
         </div>
       </div>
     </div>
@@ -442,19 +491,19 @@
       <div class="menu-item">
         <div class="menu-item-info">
           <div class="menu-item-name">Kombinacija I</div>
-          <div class="menu-item-desc">5 ćevapa + štap šišćevapa</div>
+          <div class="menu-item-desc">5 ćevapa + štap šiš ćevapa, lepinja, luk</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">8,50 €</div>
+          <div class="menu-item-price">9,00 €</div>
         </div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <div class="menu-item-name">Kombinacija II</div>
-          <div class="menu-item-desc">5 ćevapa + 2 štapa šišćevapa</div>
+          <div class="menu-item-desc">5 ćevapa + 2 štapa šiš ćevapa, lepinja, luk</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">9,50 €</div>
+          <div class="menu-item-price">10,00 €</div>
         </div>
       </div>
       <div class="menu-item">
@@ -463,7 +512,7 @@
           <div class="menu-item-desc">5 ćevapa + 1 kobasica, lepinja, luk</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">8,50 €</div>
+          <div class="menu-item-price">9,00 €</div>
         </div>
       </div>
       <div class="menu-item">
@@ -472,31 +521,13 @@
           <div class="menu-item-desc">5 ćevapa + 2 kobasice, lepinja, luk</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">9,50 €</div>
-        </div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-item-info">
-          <div class="menu-item-name">Zagrebački odrezak</div>
-          <div class="menu-item-desc">Lepinja, pomfrit, tartar, limun</div>
-        </div>
-        <div class="menu-item-right">
-          <div class="menu-item-price">10,50 €</div>
-        </div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-item-info">
-          <div class="menu-item-name">Bečki odrezak</div>
-          <div class="menu-item-desc">Lepinja, pomfrit, tartar, limun</div>
-        </div>
-        <div class="menu-item-right">
           <div class="menu-item-price">10,00 €</div>
         </div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
-          <div class="menu-item-name">Juneće kobasice</div>
-          <div class="menu-item-desc">3 kobasice, lepinja, pomfrit, senf, luk</div>
+          <div class="menu-item-name">Panirani oslić</div>
+          <div class="menu-item-desc">Pomfrit, tartar, limun</div>
         </div>
         <div class="menu-item-right">
           <div class="menu-item-price">9,50 €</div>
@@ -504,56 +535,47 @@
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
-          <div class="menu-item-name">Panirani oslić sa prilogom</div>
-          <div class="menu-item-desc">Pomfrit, lepinja, tartar, limun</div>
+          <div class="menu-item-name">Lignje</div>
+          <div class="menu-item-desc">Pomfrit, tartar, limun</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">9,00 €</div>
-        </div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-item-info">
-          <div class="menu-item-name">Lignje sa prilogom</div>
-          <div class="menu-item-desc">Lepinja, pomfrit, tartar, limun</div>
-        </div>
-        <div class="menu-item-right">
-          <div class="menu-item-price">10,80 €</div>
+          <div class="menu-item-price">11,50 €</div>
         </div>
       </div>
       <div class="menu-item highlight">
         <div class="menu-item-info">
-          <div class="menu-item-name">Miješano meso za 1 osobu</div>
+          <div class="menu-item-name">Miješano za 1 osobu</div>
           <div class="menu-item-desc">1 kobasica, 1 pljeskavica, 1 ražnjić, 3 ćevapa, lepinja, luk, pomfrit 200g</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">12,00 €</div>
+          <div class="menu-item-price">13,00 €</div>
         </div>
       </div>
       <div class="menu-item highlight">
         <div class="menu-item-info">
-          <div class="menu-item-name">Miješano meso za 2 osobe</div>
+          <div class="menu-item-name">Miješano za 2 osobe</div>
           <div class="menu-item-desc">2 kobasice, 2 pljeskavice, 2 ražnjića, 6 ćevapa, 2 lepinje, luk, pomfrit 400g</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">24,00 €</div>
+          <div class="menu-item-price">26,00 €</div>
         </div>
       </div>
       <div class="menu-item highlight">
         <div class="menu-item-info">
-          <div class="menu-item-name">Miješano meso za 4 osobe</div>
+          <div class="menu-item-name">Miješano za 4 osobe</div>
           <div class="menu-item-desc">4 kobasice, 4 pljeskavice, 4 ražnjića, 12 ćevapa, 4 lepinje, luk, pomfrit 600g</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">48,00 €</div>
+          <div class="menu-item-price">52,00 €</div>
         </div>
       </div>
       <div class="menu-item highlight">
         <div class="menu-item-info">
-          <div class="menu-item-name">Miješano meso za 6 osoba</div>
+          <div class="menu-item-name">Miješano za 6 osoba</div>
           <div class="menu-item-desc">6 kobasica, 6 pljeskavica, 6 ražnjića, 18 ćevapa, 6 lepinja, luk, pomfrit 800g</div>
         </div>
         <div class="menu-item-right">
-          <div class="menu-item-price">72,00 €</div>
+          <div class="menu-item-price">78,00 €</div>
         </div>
       </div>
     </div>
@@ -563,7 +585,7 @@
   <div class="cat-block" data-cat="dodaci">
     <div class="cat-title">
       <span class="cat-emoji">🍟</span>
-      <h2>Pomfrit, <span>dodaci</span> i salate</h2>
+      <h2>Pomfrit &amp; <span>dodaci</span></h2>
     </div>
     <div class="menu-grid-2">
       <div class="menu-item">
@@ -571,83 +593,79 @@
           <div class="menu-item-name">Mali pomfrit</div>
           <div class="menu-item-desc">200g</div>
         </div>
-        <div class="menu-item-right"><div class="menu-item-price">2,50 €</div></div>
+        <div class="menu-item-right"><div class="menu-item-price">2,80 €</div></div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <div class="menu-item-name">Veliki pomfrit</div>
           <div class="menu-item-desc">400g</div>
         </div>
-        <div class="menu-item-right"><div class="menu-item-price">4,50 €</div></div>
+        <div class="menu-item-right"><div class="menu-item-price">5,00 €</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Loaded Fries</div>
+        </div>
+        <div class="menu-item-right">
+          <span class="menu-item-badge badge-novo">Novo</span>
+          <div class="menu-item-price">5,00 €</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Sweet potato fries</div>
+        </div>
+        <div class="menu-item-right">
+          <span class="menu-item-badge badge-novo">Novo</span>
+          <div class="menu-item-price">3,50 €</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Loaded sweet potato fries</div>
+        </div>
+        <div class="menu-item-right">
+          <span class="menu-item-badge badge-novo">Novo</span>
+          <div class="menu-item-price">5,00 €</div>
+        </div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <div class="menu-item-name">Krumpirovi kroketi</div>
-          <div class="menu-item-desc">200g — Novo u ponudi</div>
+          <div class="menu-item-desc">200g</div>
         </div>
-        <div class="menu-item-right">
-          <span class="menu-item-badge badge-novo">Novo</span>
-          <div class="menu-item-price">2,50 €</div>
-        </div>
+        <div class="menu-item-right"><div class="menu-item-price">2,80 €</div></div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <div class="menu-item-name">Krumpir pole</div>
-          <div class="menu-item-desc">200g — Novo u ponudi</div>
+          <div class="menu-item-desc">200g</div>
         </div>
-        <div class="menu-item-right">
-          <span class="menu-item-badge badge-novo">Novo</span>
-          <div class="menu-item-price">2,50 €</div>
-        </div>
+        <div class="menu-item-right"><div class="menu-item-price">2,80 €</div></div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
-          <div class="menu-item-name">Umak po izboru</div>
-          <div class="menu-item-desc">Kečap, majoneza, tartar, ajvar, ljuti umak</div>
+          <div class="menu-item-name">Umak</div>
         </div>
-        <div class="menu-item-right"><div class="menu-item-price">1,50 €</div></div>
+        <div class="menu-item-right"><div class="menu-item-price">2,00 €</div></div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <div class="menu-item-name">Kajmak</div>
         </div>
-        <div class="menu-item-right"><div class="menu-item-price">2,00 €</div></div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-item-info">
-          <div class="menu-item-name">Ljuti umak</div>
-        </div>
-        <div class="menu-item-right"><div class="menu-item-price">1,50 €</div></div>
+        <div class="menu-item-right"><div class="menu-item-price">2,50 €</div></div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
           <div class="menu-item-name">Lepinja</div>
         </div>
-        <div class="menu-item-right"><div class="menu-item-price">1,70 €</div></div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-item-info">
-          <div class="menu-item-name">Mješana salata</div>
-        </div>
-        <div class="menu-item-right"><div class="menu-item-price">3,00 €</div></div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-item-info">
-          <div class="menu-item-name">Aluminijski oval mali</div>
-        </div>
-        <div class="menu-item-right"><div class="menu-item-price">1,10 €</div></div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-item-info">
-          <div class="menu-item-name">Aluminijski oval srednji</div>
-        </div>
         <div class="menu-item-right"><div class="menu-item-price">2,00 €</div></div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
-          <div class="menu-item-name">Aluminijski oval veliki</div>
+          <div class="menu-item-name">Miješana salata</div>
         </div>
-        <div class="menu-item-right"><div class="menu-item-price">2,60 €</div></div>
+        <div class="menu-item-right"><div class="menu-item-price">3,50 €</div></div>
       </div>
     </div>
   </div>
@@ -661,17 +679,17 @@
     <div class="menu-list">
       <div class="menu-item">
         <div class="menu-item-info">
-          <div class="menu-item-name">Coca Cola, Fanta, Sprite</div>
-          <div class="menu-item-desc">2 litre</div>
+          <div class="menu-item-name">Coca-Cola / Fanta / Sprite</div>
+          <div class="menu-item-desc">0,33 l</div>
         </div>
-        <div class="menu-item-right"><div class="menu-item-price">4,00 €</div></div>
+        <div class="menu-item-right"><div class="menu-item-price">2,50 €</div></div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
-          <div class="menu-item-name">Coca Cola, Fanta, Sprite</div>
-          <div class="menu-item-desc">0,33L</div>
+          <div class="menu-item-name">Coca-Cola / Fanta / Sprite</div>
+          <div class="menu-item-desc">2 l</div>
         </div>
-        <div class="menu-item-right"><div class="menu-item-price">2,50 €</div></div>
+        <div class="menu-item-right"><div class="menu-item-price">4,50 €</div></div>
       </div>
     </div>
   </div>
@@ -685,26 +703,26 @@
     <div class="menu-list">
       <div class="menu-item">
         <div class="menu-item-info">
-          <div class="menu-item-name">Palačinke sa nutellom</div>
+          <div class="menu-item-name">Palačinke Nutella</div>
+          <div class="menu-item-desc">2 komada</div>
+        </div>
+        <div class="menu-item-right"><div class="menu-item-price">5,00 €</div></div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Palačinke marmelada</div>
           <div class="menu-item-desc">2 komada</div>
         </div>
         <div class="menu-item-right"><div class="menu-item-price">4,50 €</div></div>
       </div>
       <div class="menu-item">
         <div class="menu-item-info">
-          <div class="menu-item-name">Palačinke sa marmeladom</div>
-          <div class="menu-item-desc">2 komada</div>
-        </div>
-        <div class="menu-item-right"><div class="menu-item-price">3,50 €</div></div>
-      </div>
-      <div class="menu-item">
-        <div class="menu-item-info">
-          <div class="menu-item-name">Palačinke sa nutellom i plazma keksom</div>
+          <div class="menu-item-name">Palačinke Nutella + plazma</div>
           <div class="menu-item-desc">2 komada</div>
         </div>
         <div class="menu-item-right">
           <span class="menu-item-badge badge-popular">Omiljeno</span>
-          <div class="menu-item-price">5,50 €</div>
+          <div class="menu-item-price">6,00 €</div>
         </div>
       </div>
     </div>
@@ -712,18 +730,18 @@
 
 </div>
 
-<div class="menu-note" style="margin: 0 48px 56px; max-width: calc(1200px); margin-left: auto; margin-right: auto;">
-  <strong>Napomena:</strong> Jela sa roštilja od <strong>100% junećeg mesa</strong> garantiraju kvalitetu i slasan zalogaj.
+<div class="menu-note">
+  <strong>Napomena:</strong> Jela sa roštilja od <strong>100% junećeg mesa</strong>.
   Minimalna dostava za kvart <strong>6,00 €</strong>, izvan kvarta <strong>7,00 €</strong>.
-  Dostava svaki radni dan uključujući nedjelju. Narudžbe na: <strong>+385 (0)1 7879 250</strong> ili <strong>+385 (0)91 3330 022</strong>.
+  Dostava svaki dan uključujući nedjelju. Narudžbe: <strong>+385 (0)1 7879 250</strong> ili <strong>+385 (0)91 3330 022</strong>.
 </div>
 
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="f-logo">Camel<span>Grill</span></div>
-        <p>IV. Kozari put 18, 10000 Zagreb<br>Dostava svaki dan uključujući nedjelju.<br>100% juneće meso.</p>
+        <div class="f-logo"><img src="data:image/jpeg;base64,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" alt="Camel Grill"></div>
+        <p>IV. Kozari put 18, 10000 Zagreb<br>Dostava svaki dan uključujući nedjelju.</p>
       </div>
       <div class="footer-col">
         <h4>Stranice</h4>
@@ -752,7 +770,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Camel Grill. Sva prava pridržana.</span>
+      <span>© 2025 Camel Grill. Sva prava pridržana.</span>
       <span>🔥 Pravi roštilj, pravi okus.</span>
     </div>
   </div>

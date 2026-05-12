@@ -3,397 +3,245 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kontakt — Camel Grill</title>
+<title>Kontakt – Camel Grill</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0D0A06; --surface: #1A1410; --surface2: #241C12;
-    --gold: #C8860A; --gold-light: #E8A830; --gold-pale: rgba(200,134,10,0.12);
-    --cream: #F2E8D4; --muted: #8A7A6A; --border: rgba(200,134,10,0.15);
-    --r-sm: 8px; --r-md: 14px; --r-lg: 22px;
+    --bg:#0D0A06; --surface:#1A1410; --surface2:#241C12;
+    --gold:#C8860A; --gold-light:#E8A830; --gold-pale:rgba(200,134,10,0.12);
+    --cream:#F2E8D4; --muted:#8A7A6A; --border:rgba(200,134,10,0.15);
+    --r-sm:8px; --r-md:14px; --r-lg:22px;
   }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--cream); overflow-x: hidden; }
-  h1,h2,h3,h4 { font-family: 'Playfair Display', serif; line-height: 1.15; }
-  a { text-decoration: none; color: inherit; }
-  header {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(13,10,6,0.92); border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(14px); padding: 0 48px;
-  }
-  .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 68px; }
-  .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--gold-light); }
-  .nav-logo span { color: var(--cream); font-style: italic; }
-  .nav-links { list-style: none; display: flex; gap: 36px; }
-  .nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); transition: color 0.2s; letter-spacing: 0.06em; text-transform: uppercase; }
-  .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
-  .nav-cta { background: var(--gold); color: var(--bg); padding: 10px 22px; border-radius: var(--r-sm); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.2s; }
-  .nav-cta:hover { background: var(--gold-light); }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--cream);overflow-x:hidden;}
+  h1,h2,h3,h4{font-family:'Playfair Display',serif;line-height:1.15;}
+  a{text-decoration:none;color:inherit;}
 
-  /* PAGE HERO */
-  .page-hero {
-    background: var(--surface); border-bottom: 1px solid var(--border);
-    padding: 64px 48px 56px; text-align: center; position: relative; overflow: hidden;
-  }
-  .page-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 100%, rgba(200,134,10,0.1), transparent 60%); }
-  .section-tag { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); display: block; margin-bottom: 14px; }
-  .section-tag::before { content: "— "; }
-  .page-hero h1 { font-size: clamp(36px, 5vw, 60px); color: var(--cream); position: relative; z-index: 1; }
-  .page-hero h1 em { color: var(--gold-light); font-style: italic; }
-  .page-hero p { font-size: 16px; color: var(--muted); margin-top: 14px; position: relative; z-index: 1; }
+  /* NAV */
+  header{position:sticky;top:0;z-index:100;background:rgba(13,10,6,0.94);border-bottom:1px solid var(--border);backdrop-filter:blur(14px);padding:0 48px;}
+  .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;letter-spacing:0.02em;}
+  .nav-logo span{color:var(--gold);}
+  .nav-links{list-style:none;display:flex;gap:32px;}
+  .nav-links a{font-size:.9rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);transition:color .2s;}
+  .nav-links a:hover,.nav-links a.active{color:var(--gold);}
+  .nav-cta{background:var(--gold);color:#0D0A06;font-weight:700;font-size:.85rem;padding:10px 22px;border-radius:var(--r-sm);letter-spacing:.04em;transition:background .2s;}
+  .nav-cta:hover{background:var(--gold-light);}
 
-  .section { max-width: 1200px; margin: 0 auto; padding: 80px 48px; }
+  /* HERO */
+  .page-hero{background:linear-gradient(135deg,var(--surface) 0%,var(--bg) 60%,rgba(200,134,10,0.06) 100%);padding:96px 48px 80px;text-align:center;position:relative;overflow:hidden;}
+  .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% -10%,rgba(200,134,10,0.18) 0%,transparent 65%);}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);border-radius:50px;padding:6px 18px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;position:relative;}
+  .page-hero h1{font-size:clamp(2.4rem,5vw,4rem);font-weight:700;position:relative;margin-bottom:16px;}
+  .page-hero h1 em{color:var(--gold);font-style:italic;}
+  .page-hero .lead{font-size:1.05rem;color:var(--muted);max-width:600px;margin:0 auto;line-height:1.7;position:relative;}
 
-  /* MAIN GRID */
-  .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; }
+  /* CONTACT LAYOUT */
+  .contact-section{max-width:1100px;margin:0 auto;padding:80px 48px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
 
   /* INFO CARDS */
-  .contact-info { display: flex; flex-direction: column; gap: 16px; }
-  .info-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--r-lg); padding: 28px 24px;
-    display: flex; align-items: flex-start; gap: 18px;
-    transition: border-color 0.2s;
-  }
-  .info-card:hover { border-color: rgba(200,134,10,0.35); }
-  .info-icon {
-    width: 48px; height: 48px; background: var(--gold-pale);
-    border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center;
-    font-size: 22px; flex-shrink: 0;
-  }
-  .info-content h3 { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); margin-bottom: 6px; }
-  .info-content p { font-size: 15px; color: var(--cream); font-weight: 500; margin-bottom: 2px; }
-  .info-content small { font-size: 13px; color: var(--muted); }
+  .contact-info{display:flex;flex-direction:column;gap:24px;}
+  .info-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);padding:28px 32px;display:flex;gap:20px;align-items:flex-start;transition:border-color .2s;}
+  .info-card:hover{border-color:rgba(200,134,10,0.4);}
+  .info-icon{width:48px;height:48px;min-width:48px;background:var(--gold-pale);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:1.4rem;}
+  .info-body h3{font-size:1rem;font-weight:600;margin-bottom:8px;font-family:'Playfair Display',serif;color:var(--gold-light);}
+  .info-body p,.info-body a{font-size:.95rem;color:var(--muted);line-height:1.7;display:block;}
+  .info-body a:hover{color:var(--gold);}
+  .info-body .highlight{color:var(--cream);font-weight:500;}
 
-  /* HOURS */
-  .hours-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--r-lg); padding: 28px 24px;
-  }
-  .hours-card h3 {
-    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold);
-    margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
-  }
-  .hours-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 12px 0; border-bottom: 1px solid var(--border);
-    font-size: 14px;
-  }
-  .hours-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .hours-day { color: var(--muted); }
-  .hours-time { color: var(--cream); font-weight: 600; }
-  .hours-today .hours-day { color: var(--gold-light); font-weight: 600; }
-  .hours-badge { background: var(--gold); color: var(--bg); font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+  /* HOURS TABLE */
+  .hours-table{width:100%;margin-top:10px;}
+  .hours-table tr td{padding:4px 0;font-size:.9rem;color:var(--muted);}
+  .hours-table tr td:first-child{font-weight:500;color:var(--cream);width:110px;}
+  .hours-table tr td:last-child{color:var(--gold-light);}
 
-  /* FORM */
-  .contact-form-wrap {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--r-lg); padding: 40px;
-  }
-  .contact-form-wrap h2 { font-size: 28px; color: var(--cream); margin-bottom: 8px; }
-  .contact-form-wrap h2 em { color: var(--gold-light); font-style: italic; }
-  .contact-form-wrap p { font-size: 14px; color: var(--muted); margin-bottom: 28px; line-height: 1.6; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-group { margin-bottom: 18px; }
-  .form-group label {
-    display: block; font-size: 12px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px;
-  }
-  .form-group input, .form-group textarea, .form-group select {
-    width: 100%; background: var(--bg); border: 1.5px solid var(--border);
-    padding: 12px 16px; border-radius: var(--r-sm); color: var(--cream);
-    font-family: 'Inter', sans-serif; font-size: 14px; outline: none;
-    transition: border-color 0.2s;
-  }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
-  .form-group textarea { resize: vertical; min-height: 120px; }
-  .form-group select { cursor: pointer; }
-  .form-group input::placeholder, .form-group textarea::placeholder { color: var(--muted); }
-  .form-group select option { background: var(--bg); }
-  .btn-submit {
-    width: 100%; background: var(--gold); color: var(--bg);
-    padding: 16px; border-radius: var(--r-sm); border: none; cursor: pointer;
-    font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    transition: background 0.2s, transform 0.15s;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-  }
-  .btn-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
-  .form-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 14px; line-height: 1.6; }
+  /* DELIVERY CARD */
+  .delivery-card{background:linear-gradient(135deg,var(--surface2),var(--surface));border:1px solid var(--border);border-radius:var(--r-lg);padding:36px 32px;position:relative;overflow:hidden;}
+  .delivery-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));}
+  .delivery-card h2{font-size:1.5rem;margin-bottom:8px;}
+  .delivery-card h2 em{color:var(--gold);font-style:italic;}
+  .delivery-card .sub{color:var(--muted);font-size:.9rem;margin-bottom:28px;}
+  .delivery-options{display:flex;flex-direction:column;gap:16px;}
+  .delivery-option{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-md);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;}
+  .delivery-option .d-label{font-size:.95rem;color:var(--cream);}
+  .delivery-option .d-label small{display:block;font-size:.8rem;color:var(--muted);margin-top:3px;}
+  .delivery-option .d-price{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--gold);}
+  .delivery-note{margin-top:20px;font-size:.85rem;color:var(--muted);line-height:1.6;border-top:1px solid var(--border);padding-top:16px;}
+  .delivery-note strong{color:var(--cream);}
 
-  /* MAP */
-  .map-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .map-inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
-  .map-placeholder {
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: var(--r-lg); height: 320px;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 16px; margin: 48px 0;
-    position: relative; overflow: hidden;
-  }
-  .map-placeholder::before {
-    content: ""; position: absolute; inset: 0;
-    background: radial-gradient(circle at center, rgba(200,134,10,0.08), transparent 65%);
-  }
-  .map-emoji { font-size: 64px; position: relative; z-index: 1; }
-  .map-placeholder h3 { font-size: 20px; color: var(--cream); position: relative; z-index: 1; }
-  .map-placeholder p { font-size: 14px; color: var(--muted); position: relative; z-index: 1; }
-  .map-placeholder a {
-    background: var(--gold); color: var(--bg);
-    padding: 12px 24px; border-radius: var(--r-sm);
-    font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-    position: relative; z-index: 1; transition: background 0.2s;
-  }
-  .map-placeholder a:hover { background: var(--gold-light); }
+  /* MAP PLACEHOLDER */
+  .map-section{max-width:1100px;margin:0 auto;padding:0 48px 80px;}
+  .map-section h2{font-size:1.4rem;margin-bottom:20px;}
+  .map-section h2 em{color:var(--gold);font-style:italic;}
+  .map-embed{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);height:380px;}
+  .map-embed iframe{width:100%;height:100%;border:none;}
 
-  /* DELIVERY INFO */
-  .delivery-boxes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .delivery-box {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--r-md); padding: 28px 24px; text-align: center;
-  }
-  .delivery-box .d-icon { font-size: 40px; margin-bottom: 14px; display: block; }
-  .delivery-box h3 { font-size: 17px; color: var(--cream); margin-bottom: 8px; }
-  .delivery-box p { font-size: 13px; color: var(--muted); line-height: 1.6; }
-  .delivery-box .d-price { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold-light); font-weight: 700; display: block; margin-bottom: 4px; }
+  /* CTA CALL */
+  .call-strip{background:var(--gold);padding:40px 48px;text-align:center;}
+  .call-strip h2{font-family:'Playfair Display',serif;font-size:1.8rem;color:#0D0A06;margin-bottom:8px;}
+  .call-strip p{font-size:.95rem;color:rgba(13,10,6,0.7);margin-bottom:20px;}
+  .call-numbers{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+  .call-btn{background:#0D0A06;color:var(--gold);font-weight:700;font-size:1rem;padding:12px 28px;border-radius:var(--r-sm);transition:background .2s;}
+  .call-btn:hover{background:#1A1410;}
 
   /* FOOTER */
-  footer { background: var(--surface); border-top: 1px solid var(--border); padding: 56px 48px 32px; }
-  .footer-inner { max-width: 1200px; margin: 0 auto; }
-  .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 40px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
-  .footer-brand .f-logo { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--gold-light); margin-bottom: 12px; }
-  .footer-brand .f-logo span { color: var(--cream); font-style: italic; }
-  .footer-brand p { font-size: 14px; color: var(--muted); line-height: 1.7; }
-  .footer-col h4 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 16px; }
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-  .footer-col ul li a { font-size: 14px; color: var(--muted); transition: color 0.2s; }
-  .footer-col ul li a:hover { color: var(--cream); }
-  .footer-bottom { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+  footer{background:var(--surface);border-top:1px solid var(--border);padding:40px 48px;text-align:center;}
+  .footer-inner{max-width:1100px;margin:0 auto;}
+  .footer-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;margin-bottom:12px;}
+  .footer-logo span{color:var(--gold);}
+  .footer-links{display:flex;gap:28px;justify-content:center;margin:16px 0;flex-wrap:wrap;}
+  .footer-links a{font-size:.85rem;color:var(--muted);transition:color .2s;}
+  .footer-links a:hover{color:var(--gold);}
+  .footer-bottom{font-size:.8rem;color:var(--muted);margin-top:16px;}
+  .footer-address{font-size:.85rem;color:var(--muted);margin-top:8px;}
+
+  @media(max-width:900px){
+    .contact-section{grid-template-columns:1fr;padding:48px 20px;}
+    header{padding:0 20px;}
+    .page-hero{padding:64px 20px 56px;}
+    .map-section{padding:0 20px 60px;}
+    .call-strip{padding:36px 20px;}
+    footer{padding:32px 20px;}
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="nav-inner">
+  <nav class="nav-inner">
     <a href="index.html" class="nav-logo">Camel<span>Grill</span></a>
     <ul class="nav-links">
       <li><a href="index.html">Naslovnica</a></li>
-      <li><a href="meni.html">Meni</a></li>
       <li><a href="o-nama.html">O nama</a></li>
+      <li><a href="meni.html">Cjenik</a></li>
       <li><a href="kontakt.html" class="active">Kontakt</a></li>
     </ul>
-    <a href="meni.html" class="nav-cta">Pogledaj meni</a>
-  </div>
+    <a href="tel:+38517879250" class="nav-cta">Naruči: 01 7879 250</a>
+  </nav>
 </header>
 
-<div class="page-hero">
-  <div class="section-tag">Gdje smo i kako nas naći</div>
-  <h1>Kontakt &amp; <em>dostava</em></h1>
-  <p>Posjetite nas osobno ili naručite dostavu — tu smo za vas.</p>
-</div>
+<section class="page-hero">
+  <div class="hero-badge">📍 Pronađite nas</div>
+  <h1>Kontakt & <em>dostava</em></h1>
+  <p class="lead">Posjetite nas na IV. Kozari putu ili naručite dostavu — svaki dan za vrijeme radnog vremena.</p>
+</section>
 
-<div class="section">
-  <div class="contact-grid">
+<div class="contact-section">
 
-    <!-- LEVO: INFO + RADNO VRIJEME -->
-    <div class="contact-info">
-      <div class="info-card">
-        <div class="info-icon">📍</div>
-        <div class="info-content">
-          <h3>Adresa</h3>
-          <p>Camel Grill</p>
-          <small>Posjetite nas osobno — uvijek ste dobrodošli!</small>
-        </div>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">✉️</div>
-        <div class="info-content">
-          <h3>E-mail</h3>
-          <p>info@camelgrill.com</p>
-          <small>Odgovaramo u roku 24 sata</small>
-        </div>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">🌐</div>
-        <div class="info-content">
-          <h3>Web</h3>
-          <p>www.camelgrill.com</p>
-          <small>Sve informacije na jednom mjestu</small>
-        </div>
-      </div>
+  <!-- LEFT: INFO -->
+  <div class="contact-info">
 
-      <div class="hours-card">
-        <h3>🕗 Radno vrijeme</h3>
-        <div class="hours-row hours-today">
-          <span class="hours-day">Ponedjeljak</span>
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span class="hours-badge">Otvoreno</span>
-            <span class="hours-time">08:00 – 22:00</span>
-          </div>
-        </div>
-        <div class="hours-row">
-          <span class="hours-day">Utorak</span>
-          <span class="hours-time">08:00 – 22:00</span>
-        </div>
-        <div class="hours-row">
-          <span class="hours-day">Srijeda</span>
-          <span class="hours-time">08:00 – 22:00</span>
-        </div>
-        <div class="hours-row">
-          <span class="hours-day">Četvrtak</span>
-          <span class="hours-time">08:00 – 22:00</span>
-        </div>
-        <div class="hours-row">
-          <span class="hours-day">Petak</span>
-          <span class="hours-time">08:00 – 22:00</span>
-        </div>
-        <div class="hours-row">
-          <span class="hours-day">Subota</span>
-          <span class="hours-time">08:00 – 22:00</span>
-        </div>
-        <div class="hours-row">
-          <span class="hours-day">Nedjelja</span>
-          <span class="hours-time">16:00 – 22:00</span>
-        </div>
+    <div class="info-card">
+      <div class="info-icon">📍</div>
+      <div class="info-body">
+        <h3>Adresa</h3>
+        <p class="highlight">IV. Kozari put 18</p>
+        <p>10000 Zagreb, Hrvatska</p>
       </div>
     </div>
 
-    <!-- DESNO: FORMA -->
-    <div class="contact-form-wrap">
-      <h2>Pošaljite nam <em>poruku</em></h2>
-      <p>Imate pitanje, prijedlog ili poseban zahtjev? Pišite nam i javit ćemo se što prije.</p>
-      <form onsubmit="submitForm(event)">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Ime</label>
-            <input type="text" placeholder="Vaše ime" required>
+    <div class="info-card">
+      <div class="info-icon">📞</div>
+      <div class="info-body">
+        <h3>Telefon</h3>
+        <a href="tel:+38517879250" class="highlight">+385 (0)1 7879 250</a>
+        <a href="tel:+385913330022">+385 (0)91 3330 022</a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-icon">✉️</div>
+      <div class="info-body">
+        <h3>E-mail</h3>
+        <a href="mailto:camelgrill165@gmail.com" class="highlight">camelgrill165@gmail.com</a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-icon">🕐</div>
+      <div class="info-body">
+        <h3>Radno vrijeme</h3>
+        <table class="hours-table">
+          <tr><td>Ponedjeljak</td><td>08:00 – 22:00</td></tr>
+          <tr><td>Utorak</td><td>08:00 – 22:00</td></tr>
+          <tr><td>Srijeda</td><td>08:00 – 22:00</td></tr>
+          <tr><td>Četvrtak</td><td>08:00 – 22:00</td></tr>
+          <tr><td>Petak</td><td>08:00 – 22:00</td></tr>
+          <tr><td>Subota</td><td>08:00 – 22:00</td></tr>
+          <tr><td>Nedjelja</td><td>16:00 – 22:00</td></tr>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: DELIVERY -->
+  <div>
+    <div class="delivery-card">
+      <h2>Dostava <em>na kućni prag</em></h2>
+      <p class="sub">Svaki dan za vrijeme radnog vremena</p>
+      <div class="delivery-options">
+        <div class="delivery-option">
+          <div class="d-label">
+            Dostava unutar kvarta
+            <small>Lokalna dostava</small>
           </div>
-          <div class="form-group">
-            <label>Prezime</label>
-            <input type="text" placeholder="Vaše prezime">
+          <div class="d-price">6€</div>
+        </div>
+        <div class="delivery-option">
+          <div class="d-label">
+            Dostava izvan kvarta
+            <small>Šire područje Zagreba</small>
           </div>
+          <div class="d-price">7€</div>
         </div>
-        <div class="form-group">
-          <label>E-mail</label>
-          <input type="email" placeholder="vasa@email.com" required>
-        </div>
-        <div class="form-group">
-          <label>Tema poruke</label>
-          <select>
-            <option value="">Odaberite temu...</option>
-            <option>Upit o dostavi</option>
-            <option>Narudžba za catering</option>
-            <option>Prijedlog ili pohvala</option>
-            <option>Alergeni i posebni zahtjevi</option>
-            <option>Ostalo</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Poruka</label>
-          <textarea placeholder="Napišite vašu poruku ovdje..."></textarea>
-        </div>
-        <button type="submit" class="btn-submit">
-          <span>Pošalji poruku</span>
-          <span>→</span>
-        </button>
-        <p class="form-note">Odgovaramo u roku 24 sata radnim danom.<br>Za hitne upite koristite e-mail direktno.</p>
-      </form>
+      </div>
+      <p class="delivery-note">
+        <strong>Naručite telefonom:</strong> +385 (0)1 7879 250 ili +385 (0)91 3330 022.<br>
+        Dostava je dostupna svaki dan za vrijeme radnog vremena restorana.
+      </p>
     </div>
   </div>
+
 </div>
 
-<!-- MAPA -->
+<!-- MAP -->
 <div class="map-section">
-  <div class="map-inner">
-    <div class="map-placeholder">
-      <div class="map-emoji">📍</div>
-      <h3>Pronađite nas na karti</h3>
-      <p>Kliknite gumb za navigaciju do Camel Grilla</p>
-      <a href="https://maps.google.com/?q=Camel+Grill" target="_blank">Otvori u Google Maps →</a>
-    </div>
+  <h2>Gdje <em>smo?</em></h2>
+  <div class="map-embed">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2781.8!2d15.9517!3d45.7847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4765d6a23b9f5555%3A0x1234!2sIV.+Kozari+put+18%2C+Zagreb!5e0!3m2!1shr!2shr!4v1"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
   </div>
 </div>
 
-<!-- DOSTAVA -->
-<div class="section">
-  <div style="text-align:center;margin-bottom:48px;">
-    <div class="section-tag" style="display:block;">Naručite od kuće</div>
-    <h2 style="font-size:36px;color:var(--cream);">Informacije o <em style="color:var(--gold-light);font-style:italic;">dostavi</em></h2>
-  </div>
-  <div class="delivery-boxes">
-    <div class="delivery-box">
-      <span class="d-icon">🏘️</span>
-      <span class="d-price">€6</span>
-      <h3>Unutar kvarta</h3>
-      <p>Brza dostava unutar kvarta. Minimalna narudžba €15.</p>
-    </div>
-    <div class="delivery-box">
-      <span class="d-icon">🗺️</span>
-      <span class="d-price">€7</span>
-      <h3>Izvan kvarta</h3>
-      <p>Dostavljamo i izvan kvarta. Minimalna narudžba €20.</p>
-    </div>
-    <div class="delivery-box">
-      <span class="d-icon">⚡</span>
-      <span class="d-price">~30 min</span>
-      <h3>Prosječno vrijeme</h3>
-      <p>Trudimo se dostaviti u što kraćem roku. Vruće i svježe.</p>
-    </div>
+<!-- CALL STRIP -->
+<div class="call-strip">
+  <h2>Nazovite i naručite odmah</h2>
+  <p>Brza dostava svježe hrane s roštilja na Vašu adresu</p>
+  <div class="call-numbers">
+    <a href="tel:+38517879250" class="call-btn">📞 01 7879 250</a>
+    <a href="tel:+385913330022" class="call-btn">📱 091 3330 022</a>
   </div>
 </div>
 
 <footer>
   <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="f-logo">Camel<span>Grill</span></div>
-        <p>Autentičan okus roštilja od 2015. godine.<br>100% goveđe meso, svježi sastojci, brza dostava.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Stranice</h4>
-        <ul>
-          <li><a href="index.html">Naslovnica</a></li>
-          <li><a href="meni.html">Meni</a></li>
-          <li><a href="o-nama.html">O nama</a></li>
-          <li><a href="kontakt.html">Kontakt</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Radno vrijeme</h4>
-        <ul>
-          <li><a href="#">Pon – Sub: 08:00 – 22:00</a></li>
-          <li><a href="#">Nedjelja: 16:00 – 22:00</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Kontakt</h4>
-        <ul>
-          <li><a href="mailto:info@camelgrill.com">info@camelgrill.com</a></li>
-          <li><a href="kontakt.html">Pošalji upit</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Camel Grill. Sva prava pridržana.</span>
-      <span>🔥 Pravi roštilj, pravi okus.</span>
-    </div>
+    <div class="footer-logo">Camel<span>Grill</span></div>
+    <nav class="footer-links">
+      <a href="index.html">Naslovnica</a>
+      <a href="o-nama.html">O nama</a>
+      <a href="meni.html">Cjenik</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+    <div class="footer-address">IV. Kozari put 18, 10000 Zagreb</div>
+    <div class="footer-bottom">© 2025 Camel Grill. Sva prava pridržana.</div>
   </div>
 </footer>
 
-<script>
-function submitForm(e) {
-  e.preventDefault();
-  const btn = e.target.querySelector('.btn-submit');
-  btn.innerHTML = '<span>✓ Poruka poslana!</span>';
-  btn.style.background = '#2A8A4A';
-  setTimeout(() => {
-    btn.innerHTML = '<span>Pošalji poruku</span><span>→</span>';
-    btn.style.background = '';
-    e.target.reset();
-  }, 3000);
-}
-</script>
 </body>
 </html>
